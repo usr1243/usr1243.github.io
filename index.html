@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — KI-Entwickler & Builder</title>
+<meta name="description" content="Ich baue KI-Produkte, die man anfassen kann — von Agenten-Systemen bis zu Web- und Desktop-Apps. Live-Demos zum Reinklicken.">
+<style>
+  :root{
+    --bg:#faf9f6; --surface:#ffffff; --text:#191817; --muted:#6b6864;
+    --line:#e7e4de; --accent:#2b4acc; --accent-soft:#eaeeff; --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
+    --radius:16px;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#141414;--surface:#1c1c1b;--text:#ececea;--muted:#9c988f;--line:#2c2b29;--accent:#8aa0ff;--accent-soft:#20233a;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);}
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+
+  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem}
+  .brand .dot{color:var(--accent)}
+  .nav-right{display:flex;align-items:center;gap:8px}
+  .btn{font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--text);transition:.15s}
+  .btn:hover{border-color:var(--accent);color:var(--accent)}
+  .lang{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .lang button{border:0;background:var(--surface);padding:8px 12px;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--muted)}
+  .lang button.on{background:var(--accent);color:#fff}
+
+  .hero{padding:88px 0 56px}
+  .eyebrow{color:var(--accent);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
+  h1{font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;font-weight:800;max-width:16ch}
+  .lede{margin-top:22px;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--muted);max-width:56ch}
+  .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
+  .cta{padding:12px 20px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid var(--line);background:var(--surface)}
+  .cta.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .cta:hover{transform:translateY(-1px)}
+
+  .section{padding:40px 0 20px}
+  .section h2{font-size:1.7rem;letter-spacing:-.02em;font-weight:750}
+  .section .sub{color:var(--muted);margin-top:6px;margin-bottom:26px}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
+  @media(max-width:720px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:.18s}
+  .card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+  .card.feat{grid-column:span 2}
+  @media(max-width:720px){.card.feat{grid-column:span 1}}
+  .shot{aspect-ratio:16/10;overflow:hidden;background:var(--accent-soft);border-bottom:1px solid var(--line)}
+  .card.feat .shot{aspect-ratio:16/8}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+  .body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+  .tag{font-size:.72rem;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
+  .card h3{font-size:1.25rem;letter-spacing:-.01em;margin-bottom:8px}
+  .badge{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:3px 8px;border-radius:6px;margin-left:8px;vertical-align:middle}
+  .pitch{color:var(--muted);font-size:.96rem;flex:1}
+  .pitch b{color:var(--text);font-weight:650}
+  .links{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+  .lnk{font-size:.86rem;font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px}
+  .lnk.live{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .lnk:hover{transform:translateY(-1px)}
+  .lnk.disabled{opacity:.55}
+
+  /* AI architecture */
+  .arch{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px;margin-top:8px;box-shadow:var(--shadow)}
+  .flow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 10px}
+  .node{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:600;font-size:.9rem;text-align:center;min-width:120px}
+  .node.orch{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .subs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .arrow{color:var(--muted);font-size:1.4rem}
+  .arch .note{color:var(--muted);font-size:.92rem;text-align:center;margin-top:8px}
+
+  footer{border-top:1px solid var(--line);margin-top:64px;padding:44px 0 60px;color:var(--muted)}
+  footer a{color:var(--accent);font-weight:600}
+  .foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+
+  [data-en]{display:none}
+  html[lang="en"] [data-de]{display:none}
+  html[lang="en"] [data-en]{display:revert}
+  .ph{color:var(--accent);border-bottom:2px dotted var(--accent)}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <div class="brand"><span class="ph">[Dein Name]</span><span class="dot">.</span></div>
+    <div class="nav-right">
+      <div class="lang" role="group" aria-label="Sprache / Language">
+        <button id="de" class="on" onclick="setLang('de')">DE</button>
+        <button id="en" onclick="setLang('en')">EN</button>
+      </div>
+      <a class="btn" href="https://github.com/usr1243" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow"><span data-de>KI-Entwickler & Builder · Schweiz</span><span data-en>AI Developer & Builder · Switzerland</span></div>
+    <h1>
+      <span data-de>Ich baue KI-Produkte, die man anfassen kann.</span>
+      <span data-en>I build AI products you can actually click.</span>
+    </h1>
+    <p class="lede">
+      <span data-de>Von Multi-Agenten-Systemen über Web-Apps bis zu Desktop-Software — echte, laufende Projekte statt Folien. Unten kannst du fast alles live ausprobieren.</span>
+      <span data-en>From multi-agent systems to web apps and desktop software — real, running projects instead of slides. You can try most of them live below.</span>
+    </p>
+    <div class="hero-cta">
+      <a class="cta primary" href="#projekte"><span data-de>Projekte ansehen</span><span data-en>See the projects</span></a>
+      <a class="cta" href="#agenten"><span data-de>KI-Agenten-Architektur</span><span data-en>AI agent architecture</span></a>
+    </div>
+  </section>
+
+  <section class="section" id="projekte">
+    <h2><span data-de>Ausgewählte Projekte</span><span data-en>Selected projects</span></h2>
+    <p class="sub"><span data-de>Klick dich rein — die meisten laufen live.</span><span data-en>Click in — most are live.</span></p>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="section" id="agenten">
+    <h2><span data-de>Wie meine KI-Agenten aufgebaut sind</span><span data-en>How my AI agents are built</span></h2>
+    <p class="sub"><span data-de>Das Spannende ist die Architektur: Ein Orchestrator-Agent steuert mehrere Sub-Agenten gleichzeitig.</span><span data-en>The interesting part is the architecture: an orchestrator agent coordinates several sub-agents at once.</span></p>
+    <div class="arch">
+      <div class="flow">
+        <div class="node orch"><span data-de>Orchestrator-Agent</span><span data-en>Orchestrator agent</span></div>
+        <div class="arrow">→</div>
+        <div class="subs">
+          <div class="node"><span data-de>Sub-Agent A</span><span data-en>Sub-agent A</span></div>
+          <div class="node"><span data-de>Sub-Agent B</span><span data-en>Sub-agent B</span></div>
+          <div class="node"><span data-de>Sub-Agent C</span><span data-en>Sub-agent C</span></div>
+        </div>
+        <div class="arrow">→</div>
+        <div class="node"><span data-de>Ergebnis</span><span data-en>Result</span></div>
+      </div>
+      <p class="note">
+        <span data-de>Statt eines Agenten, der alles versucht, lässt ein Orchestrator ein <b>Team von Spezialisten parallel</b> arbeiten — jeder lädt nur sein eigenes Wissen. Mein Debugging-Agent geht sogar über 5 Phasen: ein Agent kartografiert den Code, ein Schwarm analysiert, ein zweiter Schwarm behebt die Fehler.</span>
+        <span data-en>Instead of one agent doing everything, an orchestrator runs a <b>team of specialists in parallel</b> — each loading only its own knowledge. My debugging agent even runs 5 phases: one agent maps the code, a swarm analyses, a second swarm fixes the bugs.</span>
+      </p>
+      <div class="links" style="justify-content:center">
+        <a class="lnk live" href="https://github.com/usr1243/claude-agent-toolkit" target="_blank" rel="noopener"><span data-de>Code & Diagramme ansehen</span><span data-en>See code & diagrams</span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>
+      <div style="font-weight:700;color:var(--text)"><span class="ph">[Dein Name]</span></div>
+      <div style="font-size:.9rem;margin-top:4px"><span data-de>Auf Jobsuche · offen für Anfragen</span><span data-en>Open to opportunities</span></div>
+    </div>
+    <div style="font-size:.9rem">
+      <a href="https://github.com/usr1243" target="_blank" rel="noopener">GitHub</a> ·
+      <a href="mailto:[deine-email]">E-Mail</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const P = [
+  {
+    key:"handwerkos", feat:true, badge:{de:"KI-Agenten · Live",en:"AI agents · Live"},
+    title:"HandwerkOS", img:"assets/handwerkos.png",
+    tags:["Next.js","TypeScript","KI-Agenten","Prisma"],
+    live:"https://handwerkos-app.vercel.app", code:null,
+    de:"Ein <b>Backoffice aus KI-Agenten</b> für Schweizer Handwerksbetriebe: Ein Orchestrator liest jede Anfrage und gibt sie an den richtigen Spezialisten weiter — Offerten, Termine, Nachfass, Rechnungen. Fachlich korrekt nach Schweizer Recht, und <b>nichts geht raus ohne Freigabe</b>. Demo-Login vorausgefüllt.",
+    en:"A <b>back-office made of AI agents</b> for Swiss trade businesses: an orchestrator reads every request and routes it to the right specialist — quotes, scheduling, follow-ups, invoices. Correct under Swiss law, and <b>nothing goes out without approval</b>. Demo login pre-filled."
+  },
+  {
+    key:"toolkit", feat:true, badge:{de:"KI · Open Source",en:"AI · Open source"},
+    title:"Claude Agent Toolkit", img:null,
+    tags:["Claude Code","Multi-Agent","Orchestrierung"],
+    live:null, code:"https://github.com/usr1243/claude-agent-toolkit", img:"assets/agents-cover.svg",
+    de:"Eine Sammlung von <b>10 selbstgebauten KI-Agenten</b> — inklusive mehrschichtiger Orchestrierung, bei der ein Agent weitere Sub-Agenten parallel steuert. Zeigt die Architektur und Logik hinter meinen Agenten (siehe Sektion oben).",
+    en:"A collection of <b>10 self-built AI agents</b> — including multi-layer orchestration where one agent coordinates sub-agents in parallel. Shows the architecture and logic behind my agents (see the section above)."
+  },
+  {
+    key:"passerelle", badge:{de:"Live",en:"Live"},
+    title:"Passerelle Lerntool", img:"assets/passerelle.png",
+    tags:["PWA","Cloudflare","Groq KI","Spaced Repetition"],
+    live:"https://usr1243.github.io/passerelle-lerntool/passerelle_lerntool.html", code:"https://github.com/usr1243/passerelle-lerntool",
+    de:"Lern-App für die Schweizer Passerelle-Prüfung: Stoffplan, <b>Karteikarten mit Spaced Repetition</b>, Pomodoro und ein KI-Assistent, der aus eigenem Stoff Zusammenfassungen und Quizfragen macht. Kein Login, läuft offline.",
+    en:"A study app for the Swiss Passerelle exam: study plan, <b>spaced-repetition flashcards</b>, Pomodoro and an AI assistant that turns your material into summaries and quizzes. No login, works offline."
+  },
+  {
+    key:"sidequest", badge:{de:"Live",en:"Live"},
+    title:"Questside", img:"assets/sidequest.png",
+    tags:["PWA","Supabase","Gamification"],
+    live:"https://questside.app", code:null,
+    de:"Eine <b>gamifizierte Quest-App</b>, die aus 500+ Mini-Challenges echte Aufgaben fürs echte Leben macht — mit XP, Leveln, Streaks und Rangliste. Wähle Sprache, dann direkt reinklicken.",
+    en:"A <b>gamified quest app</b> that turns 500+ mini-challenges into real-life tasks — with XP, levels, streaks and a leaderboard. Pick a language and click straight in."
+  },
+  {
+    key:"filmtracker", badge:{de:"Live",en:"Live"},
+    title:"Filmtracker", img:"assets/filmtracker.png",
+    tags:["Cloudflare Worker","KV","TMDb API"],
+    live:"https://filmtrackerbambo.questside.workers.dev", code:"https://github.com/usr1243/filmtracker",
+    de:"Persönliche Film-Datenbank statt Excel-Liste: <b>639 Filme</b> bewerten, filtern, durchsuchen. Beim Import holt die App automatisch Poster, Genre und Beschreibung. Kein Login.",
+    en:"A personal movie database instead of a spreadsheet: rate, filter and search <b>639 films</b>. On import the app auto-fetches poster, genre and description. No login."
+  },
+  {
+    key:"budget", badge:{de:"Live",en:"Live"},
+    title:"Budget Tracker CH", img:"assets/budget-tracker.png",
+    tags:["Cloudflare","iOS Shortcuts","Apple Pay","PWA"],
+    live:"https://budgetplaner.questside.workers.dev", code:"https://github.com/usr1243/budget-tracker",
+    de:"Budget-Tracker für die Schweiz mit dem Kniff: <b>Ausgaben erfassen sich selbst</b>. Ein iOS-Kurzbefehl wird bei jeder Apple-Pay-Zahlung ausgelöst und bucht Betrag und Händler automatisch — kein manuelles Eintippen.",
+    en:"A budget tracker for Switzerland with a twist: <b>expenses record themselves</b>. An iOS Shortcut fires on every Apple Pay payment and books amount and merchant automatically — no manual entry."
+  },
+  {
+    key:"meddoc", badge:{de:"Kundenprojekt · Case-Study",en:"Client project · Case study"},
+    title:"MedDoc Analyzer", img:"assets/meddoc.png",
+    tags:["Electron","React","Lokale KI (Ollama)","OCR"],
+    live:null, code:null,
+    de:"Desktop-App für eine <b>Schweizer Arztpraxis-Kette</b>: Eingehende Arztberichte werden per lokaler KI (Ollama, komplett offline — keine Cloud) automatisch analysiert, kategorisiert und ablagebereit benannt. Spart pro Praxisassistenz <b>ca. 2,5–3,5 Stunden pro Tag</b>. Kein Code öffentlich (Kundenprojekt).",
+    en:"A desktop app for a <b>Swiss medical practice group</b>: incoming doctor's reports are analysed, categorised and named for filing by a local AI (Ollama, fully offline — no cloud). Saves each assistant <b>~2.5–3.5 hours per day</b>. Code not public (client project)."
+  },
+  {
+    key:"roulette", badge:{de:"Spaß-Projekt",en:"Fun project"},
+    title:"Roulette Strategy Simulator", img:"assets/roulette.png",
+    tags:["Vanilla JS","Wahrscheinlichkeit"],
+    live:null, code:"https://github.com/usr1243/roulette-simulator",
+    de:"Ein kleines Wochenend-Projekt über <b>Wahrscheinlichkeit</b>: Der Simulator lässt Wettsysteme wie Martingale und Fibonacci über tausende simulierte Spins gegeneinander laufen — und zeigt sichtbar, warum keines den Hausvorteil schlägt.",
+    en:"A small weekend project about <b>probability</b>: the simulator runs betting systems like Martingale and Fibonacci against thousands of simulated spins — visibly showing why none beats the house edge."
+  },
+  {
+    key:"moto", badge:{de:"Code",en:"Code"},
+    title:"Moto Weather Route", img:"assets/motoweather.png",
+    tags:["Vanilla JS","Leaflet","2 APIs"],
+    live:null, code:"https://github.com/usr1243/motoweather",
+    de:"Wetter-Tool für Motorradfahrer: prüft das Wetter <b>entlang der ganzen Route</b> zur Fahrtzeit, nicht nur am Ziel. Kombiniert Routing (OpenRouteService) und Wetter (Open-Meteo) auf einer Karte.",
+    en:"A weather tool for motorcyclists: checks the weather <b>along the whole route</b> at ride time, not just at the destination. Combines routing (OpenRouteService) and weather (Open-Meteo) on a map."
+  }
+];
+
+function card(p, lang){
+  const shot = p.noimg
+    ? `<div class="shot" style="display:flex;align-items:center;justify-content:center;font-size:3rem">🤖</div>`
+    : (p.img?`<div class="shot"><img src="${p.img}" alt="${p.title}"></div>`:"");
+  const tags = p.tags.map(t=>`<span class="tag">${t}</span>`).join("");
+  const badge = p.badge?`<span class="badge">${p.badge[lang]}</span>`:"";
+  const live = p.live?`<a class="lnk live" href="${p.live}" target="_blank" rel="noopener">${lang==="de"?"Live ansehen":"View live"} ↗</a>`:"";
+  const code = p.code?`<a class="lnk" href="${p.code}" target="_blank" rel="noopener">Code ↗</a>`:"";
+  return `<article class="card${p.feat?" feat":""}">${shot}
+    <div class="body">
+      <div class="tags">${tags}</div>
+      <h3>${p.title}${badge}</h3>
+      <p class="pitch">${p[lang]}</p>
+      <div class="links">${live}${code}</div>
+    </div></article>`;
+}
+function render(){
+  const lang = document.documentElement.lang;
+  document.getElementById("grid").innerHTML = P.map(p=>card(p,lang)).join("");
+}
+function setLang(l){
+  document.documentElement.lang=l;
+  document.getElementById("de").classList.toggle("on",l==="de");
+  document.getElementById("en").classList.toggle("on",l==="en");
+  try{localStorage.setItem("lang",l)}catch(e){}
+  render();
+}
+setLang((()=>{try{return localStorage.getItem("lang")||"de"}catch(e){return "de"}})());
+</script>
+</body>
+</html>
