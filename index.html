@@ -88,7 +88,7 @@
 <body>
 <header>
   <div class="wrap nav">
-    <div class="brand">Lorenz<span class="dot">.</span></div>
+    <div class="brand"><span class="dot">●</span></div>
     <div class="nav-right">
       <div class="lang" role="group" aria-label="Sprache / Language">
         <button id="de" class="on" onclick="setLang('de')">DE</button>
@@ -107,8 +107,8 @@
       <span data-en>I build AI products you can actually click.</span>
     </h1>
     <p class="lede">
-      <span data-de>Von Multi-Agenten-Systemen über Web-Apps bis zu Desktop-Software — echte, laufende Projekte statt Folien. Unten kannst du fast alles live ausprobieren.</span>
-      <span data-en>From multi-agent systems to web apps and desktop software — real, running projects instead of slides. You can try most of them live below.</span>
+      <span data-de>Von Multi-Agenten-Systemen über Web-Apps bis zu Desktop-Software — Projekte, die wirklich laufen. Unten kannst du fast alles live ausprobieren.</span>
+      <span data-en>From multi-agent systems to web apps and desktop software — projects that actually run. You can try most of them live below.</span>
     </p>
     <div class="hero-cta">
       <a class="cta primary" href="#projekte"><span data-de>Projekte ansehen</span><span data-en>See the projects</span></a>
@@ -152,7 +152,7 @@
   <div class="wrap foot-row">
     <div>
       <div style="font-weight:700;color:var(--text)">Lorenz</div>
-      <div style="font-size:.9rem;margin-top:4px"><span data-de>Auf Jobsuche · offen für Anfragen</span><span data-en>Open to opportunities</span></div>
+      <div style="font-size:1.15rem;font-weight:600;color:var(--text);margin-top:6px"><span data-de>Offen für Anfragen — brauchst du etwas gebaut?</span><span data-en>Open to inquiries — need something built?</span></div>
     </div>
     <div style="font-size:.9rem">
       <a href="https://github.com/usr1243" target="_blank" rel="noopener">GitHub</a> ·
@@ -180,6 +180,14 @@ const P = [
     en:"<b>5 self-built AI agents</b>, each explained in detail — including multi-layer orchestration where one agent coordinates sub-agents in parallel (coaches, deep-debug, application assistant, prompt improver, skill checker)."
   },
   {
+    key:"meddoc", badge:{de:"Kundenprojekt · Case-Study",en:"Client project · Case study"},
+    title:"MedDoc Analyzer", img:"assets/meddoc.png",
+    tags:["Electron","React","Lokale KI (Ollama)","OCR"],
+    live:null, code:null,
+    de:"Desktop-App für eine <b>Schweizer Arztpraxis-Kette</b>: Eingehende Arztberichte werden per lokaler KI (Ollama, komplett offline — keine Cloud) automatisch analysiert, kategorisiert und ablagebereit benannt. Spart pro Praxisassistenz <b>ca. 2,5–3,5 Stunden pro Tag</b>. Kein Code öffentlich (Kundenprojekt).",
+    en:"A desktop app for a <b>Swiss medical practice group</b>: incoming doctor's reports are analysed, categorised and named for filing by a local AI (Ollama, fully offline — no cloud). Saves each assistant <b>~2.5–3.5 hours per day</b>. Code not public (client project)."
+  },
+  {
     key:"passerelle", badge:{de:"Live",en:"Live"},
     title:"Passerelle Lerntool", img:"assets/passerelle.png",
     tags:["PWA","Cloudflare","Groq KI","Spaced Repetition"],
@@ -196,12 +204,20 @@ const P = [
     en:"A <b>gamified quest app</b> that turns 500+ mini-challenges into real-life tasks — with XP, levels, streaks and a leaderboard. Pick a language and click straight in."
   },
   {
-    key:"filmtracker", badge:{de:"Live",en:"Live"},
+    key:"filmtracker", badge:{de:"Code",en:"Code"},
     title:"Filmtracker", img:"assets/filmtracker.png",
     tags:["Cloudflare Worker","KV","TMDb API"],
-    live:"https://filmtrackerbambo.questside.workers.dev", code:"https://github.com/usr1243/filmtracker",
-    de:"Persönliche Film-Datenbank statt Excel-Liste: <b>639 Filme</b> bewerten, filtern, durchsuchen. Beim Import holt die App automatisch Poster, Genre und Beschreibung. Kein Login.",
-    en:"A personal movie database instead of a spreadsheet: rate, filter and search <b>639 films</b>. On import the app auto-fetches poster, genre and description. No login."
+    live:null, code:"https://github.com/usr1243/filmtracker",
+    de:"Persönliche Film-Datenbank statt Excel-Liste: Filme bewerten, filtern, durchsuchen. Beim Import holt die App automatisch Poster, Genre und Beschreibung. Kein Login. Die Live-Version zeigt meine echte, private Filmliste — deshalb hier nur der Code.",
+    en:"A personal movie database instead of a spreadsheet: rate, filter and search films. On import the app auto-fetches poster, genre and description. No login. The live version shows my real, private movie list — so only the code is linked here."
+  },
+  {
+    key:"moto", badge:{de:"Code",en:"Code"},
+    title:"Moto Weather Route", img:"assets/motoweather.png",
+    tags:["Vanilla JS","Leaflet","2 APIs"],
+    live:null, code:"https://github.com/usr1243/motoweather",
+    de:"Wetter-Tool für Motorradfahrer: prüft das Wetter <b>entlang der ganzen Route</b> zur Fahrtzeit, nicht nur am Ziel. Kombiniert Routing (OpenRouteService) und Wetter (Open-Meteo) auf einer Karte.",
+    en:"A weather tool for motorcyclists: checks the weather <b>along the whole route</b> at ride time, not just at the destination. Combines routing (OpenRouteService) and weather (Open-Meteo) on a map."
   },
   {
     key:"budget", badge:{de:"Live",en:"Live"},
@@ -212,28 +228,12 @@ const P = [
     en:"A budget tracker for Switzerland with a twist: <b>expenses record themselves</b>. An iOS Shortcut fires on every Apple Pay payment and books amount and merchant automatically — no manual entry."
   },
   {
-    key:"meddoc", badge:{de:"Kundenprojekt · Case-Study",en:"Client project · Case study"},
-    title:"MedDoc Analyzer", img:"assets/meddoc.png",
-    tags:["Electron","React","Lokale KI (Ollama)","OCR"],
-    live:null, code:null,
-    de:"Desktop-App für eine <b>Schweizer Arztpraxis-Kette</b>: Eingehende Arztberichte werden per lokaler KI (Ollama, komplett offline — keine Cloud) automatisch analysiert, kategorisiert und ablagebereit benannt. Spart pro Praxisassistenz <b>ca. 2,5–3,5 Stunden pro Tag</b>. Kein Code öffentlich (Kundenprojekt).",
-    en:"A desktop app for a <b>Swiss medical practice group</b>: incoming doctor's reports are analysed, categorised and named for filing by a local AI (Ollama, fully offline — no cloud). Saves each assistant <b>~2.5–3.5 hours per day</b>. Code not public (client project)."
-  },
-  {
     key:"roulette", badge:{de:"Spaß-Projekt",en:"Fun project"},
     title:"Roulette Strategy Simulator", img:"assets/roulette.png",
     tags:["Vanilla JS","Wahrscheinlichkeit"],
     live:null, code:"https://github.com/usr1243/roulette-simulator",
     de:"Ein kleines Wochenend-Projekt über <b>Wahrscheinlichkeit</b>: Der Simulator lässt Wettsysteme wie Martingale und Fibonacci über tausende simulierte Spins gegeneinander laufen — und zeigt sichtbar, warum keines den Hausvorteil schlägt.",
     en:"A small weekend project about <b>probability</b>: the simulator runs betting systems like Martingale and Fibonacci against thousands of simulated spins — visibly showing why none beats the house edge."
-  },
-  {
-    key:"moto", badge:{de:"Code",en:"Code"},
-    title:"Moto Weather Route", img:"assets/motoweather.png",
-    tags:["Vanilla JS","Leaflet","2 APIs"],
-    live:null, code:"https://github.com/usr1243/motoweather",
-    de:"Wetter-Tool für Motorradfahrer: prüft das Wetter <b>entlang der ganzen Route</b> zur Fahrtzeit, nicht nur am Ziel. Kombiniert Routing (OpenRouteService) und Wetter (Open-Meteo) auf einer Karte.",
-    en:"A weather tool for motorcyclists: checks the weather <b>along the whole route</b> at ride time, not just at the destination. Combines routing (OpenRouteService) and weather (Open-Meteo) on a map."
   }
 ];
 
