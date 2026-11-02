@@ -3,276 +3,833 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Portfolio — KI-Entwickler & Builder</title>
-<meta name="description" content="Ich baue KI-Produkte, die man anfassen kann — von Agenten-Systemen bis zu Web- und Desktop-Apps. Live-Demos zum Reinklicken.">
+<title>Lorenz — KI-Entwickler & Builder</title>
+<meta name="description" content="Ich baue KI-Produkte, die man anfassen kann: Multi-Agenten-Systeme, Web-Apps und Desktop-Software aus der Schweiz. Die meisten Projekte laufen live.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#f7f6f2" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#0e0f12" media="(prefers-color-scheme: dark)">
+<link rel="canonical" href="https://usr1243.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Lorenz — KI-Entwickler & Builder">
+<meta property="og:description" content="Multi-Agenten-Systeme, Web-Apps und Desktop-Software für echte Probleme. Die meisten Projekte laufen live.">
+<meta property="og:url" content="https://usr1243.github.io/">
+<meta property="og:image" content="https://usr1243.github.io/assets/filmtracker.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232f4bd6'/%3E%3Cpath d='M22 16h8v24h14v8H22z' fill='%23fff'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap">
+<script>
+  /* Theme + language before first paint (no flash) */
+  (function(){
+    try{
+      var t=localStorage.getItem("theme"); if(t==="light"||t==="dark") document.documentElement.setAttribute("data-theme",t);
+      var l=localStorage.getItem("lang"); if(l==="en"||l==="de") document.documentElement.lang=l;
+    }catch(e){}
+    document.documentElement.classList.add("js");
+  })();
+</script>
 <style>
   :root{
-    --bg:#faf9f6; --surface:#ffffff; --text:#191817; --muted:#6b6864;
-    --line:#e7e4de; --accent:#2b4acc; --accent-soft:#eaeeff; --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.06);
-    --radius:16px;
+    --bg:#f7f6f2; --bg-2:#efede7; --surface:#ffffff; --surface-2:#faf9f6;
+    --text:#15161a; --text-2:#41434a; --muted:#6b6e76;
+    --line:#e4e2db; --line-2:#d3d0c7;
+    --accent:#2f4bd6; --accent-2:#2440bf; --accent-soft:#e9edff; --on-accent:#ffffff;
+    --ok:#1f9d55;
+    --inv-bg:#15161a; --inv-text:#f7f6f2; --inv-muted:#a6a9b2; --inv-line:#2d2f36;
+    --shadow-sm:0 1px 2px rgba(20,20,30,.05),0 2px 8px rgba(20,20,30,.04);
+    --shadow:0 1px 2px rgba(20,20,30,.05),0 16px 40px -12px rgba(20,20,30,.16);
+    --r:14px; --r-lg:22px;
+    --font:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    --mono:"JetBrains Mono",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
   }
   @media (prefers-color-scheme:dark){
-    :root{--bg:#141414;--surface:#1c1c1b;--text:#ececea;--muted:#9c988f;--line:#2c2b29;--accent:#8aa0ff;--accent-soft:#20233a;--shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.4);}
+    :root:not([data-theme="light"]){
+      --bg:#0e0f12; --bg-2:#131519; --surface:#16181d; --surface-2:#1b1e24;
+      --text:#eceef1; --text-2:#c3c6cc; --muted:#8f939c;
+      --line:#25282f; --line-2:#33373f;
+      --accent:#8da1ff; --accent-2:#a5b5ff; --accent-soft:#1b2140; --on-accent:#0e0f12;
+      --ok:#3fcf7f;
+      --inv-bg:#f3f2ee; --inv-text:#15161a; --inv-muted:#5e616a; --inv-line:#dedbd3;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.25);
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -12px rgba(0,0,0,.6);
+    }
   }
+  :root[data-theme="dark"]{
+    --bg:#0e0f12; --bg-2:#131519; --surface:#16181d; --surface-2:#1b1e24;
+    --text:#eceef1; --text-2:#c3c6cc; --muted:#8f939c;
+    --line:#25282f; --line-2:#33373f;
+    --accent:#8da1ff; --accent-2:#a5b5ff; --accent-soft:#1b2140; --on-accent:#0e0f12;
+    --ok:#3fcf7f;
+    --inv-bg:#f3f2ee; --inv-text:#15161a; --inv-muted:#5e616a; --inv-line:#dedbd3;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.35),0 2px 8px rgba(0,0,0,.25);
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 16px 40px -12px rgba(0,0,0,.6);
+  }
+
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.6;-webkit-font-smoothing:antialiased}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.6;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-feature-settings:"cv11","ss01","calt"}
   a{color:inherit;text-decoration:none}
-  .wrap{max-width:1080px;margin:0 auto;padding:0 24px}
+  img,svg{display:block;max-width:100%}
+  button{font:inherit;color:inherit}
+  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+  @media (max-width:640px){.wrap{padding:0 18px}}
 
-  header{position:sticky;top:0;z-index:50;backdrop-filter:blur(12px);background:color-mix(in srgb,var(--bg) 82%,transparent);border-bottom:1px solid var(--line)}
-  .nav{display:flex;align-items:center;justify-content:space-between;height:64px}
-  .brand{font-weight:700;letter-spacing:-.02em;font-size:1.05rem}
-  .brand .dot{color:var(--accent)}
-  .nav-right{display:flex;align-items:center;gap:8px}
-  .btn{font-size:.85rem;font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--text);transition:.15s}
-  .btn:hover{border-color:var(--accent);color:var(--accent)}
-  .lang{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
-  .lang button{border:0;background:var(--surface);padding:8px 12px;font-size:.8rem;font-weight:600;cursor:pointer;color:var(--muted)}
-  .lang button.on{background:var(--accent);color:#fff}
-
-  .hero{padding:88px 0 56px}
-  .eyebrow{color:var(--accent);font-weight:600;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:18px}
-  h1{font-size:clamp(2.1rem,5vw,3.6rem);line-height:1.08;letter-spacing:-.03em;font-weight:800;max-width:16ch}
-  .lede{margin-top:22px;font-size:clamp(1.05rem,2vw,1.3rem);color:var(--muted);max-width:56ch}
-  .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap}
-  .cta{padding:12px 20px;border-radius:12px;font-weight:600;font-size:.95rem;border:1px solid var(--line);background:var(--surface)}
-  .cta.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .cta:hover{transform:translateY(-1px)}
-
-  .section{padding:40px 0 20px}
-  .section h2{font-size:1.7rem;letter-spacing:-.02em;font-weight:750}
-  .section .sub{color:var(--muted);margin-top:6px;margin-bottom:26px}
-
-  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:22px}
-  @media(max-width:720px){.grid{grid-template-columns:1fr}}
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;display:flex;flex-direction:column;box-shadow:var(--shadow);transition:.18s}
-  .card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
-  .card.feat{grid-column:span 2}
-  @media(max-width:720px){.card.feat{grid-column:span 1}}
-  .shot{aspect-ratio:16/10;overflow:hidden;background:var(--accent-soft);border-bottom:1px solid var(--line)}
-  .card.feat .shot{aspect-ratio:16/8}
-  .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
-  .body{padding:22px 22px 24px;display:flex;flex-direction:column;flex:1}
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
-  .tag{font-size:.72rem;font-weight:600;color:var(--muted);background:var(--bg);border:1px solid var(--line);padding:3px 9px;border-radius:999px}
-  .card h3{font-size:1.25rem;letter-spacing:-.01em;margin-bottom:8px}
-  .badge{font-size:.68rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--accent);background:var(--accent-soft);padding:3px 8px;border-radius:6px;margin-left:8px;vertical-align:middle}
-  .pitch{color:var(--muted);font-size:.96rem;flex:1}
-  .pitch b{color:var(--text);font-weight:650}
-  .links{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
-  .lnk{font-size:.86rem;font-weight:600;padding:8px 14px;border-radius:10px;border:1px solid var(--line);display:inline-flex;align-items:center;gap:6px}
-  .lnk.live{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .lnk:hover{transform:translateY(-1px)}
-  .lnk.disabled{opacity:.55}
-
-  /* AI architecture */
-  .arch{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:32px;margin-top:8px;box-shadow:var(--shadow)}
-  .flow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;margin:26px 0 10px}
-  .node{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:12px 16px;font-weight:600;font-size:.9rem;text-align:center;min-width:120px}
-  .node.orch{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .subs{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-  .arrow{color:var(--muted);font-size:1.4rem}
-  .arch .note{color:var(--muted);font-size:.92rem;text-align:center;margin-top:8px}
-
-  footer{border-top:1px solid var(--line);margin-top:64px;padding:44px 0 60px;color:var(--muted)}
-  footer a{color:var(--accent);font-weight:600}
-  .foot-row{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
-
+  /* language switching */
   [data-en]{display:none}
   html[lang="en"] [data-de]{display:none}
   html[lang="en"] [data-en]{display:revert}
-  .ph{color:var(--accent);border-bottom:2px dotted var(--accent)}
+
+  /* ---------- header ---------- */
+  .site-header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:saturate(1.4) blur(14px);-webkit-backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+  .site-header.scrolled{border-bottom-color:var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:16px}
+  .brand{display:flex;align-items:center;gap:10px;font-weight:700;letter-spacing:-.01em}
+  .mark{width:30px;height:30px;border-radius:9px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:800;font-size:.95rem;letter-spacing:0}
+  .brand small{display:block;font-weight:500;font-size:.74rem;color:var(--muted);letter-spacing:0;line-height:1.1}
+  .links{display:flex;gap:4px}
+  .links a{padding:8px 12px;border-radius:9px;font-size:.9rem;font-weight:500;color:var(--text-2);transition:background .15s,color .15s}
+  .links a:hover{background:var(--bg-2);color:var(--text)}
+  .links a.active{color:var(--text);background:var(--bg-2)}
+  .nav-right{display:flex;align-items:center;gap:8px}
+  .seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--surface)}
+  .seg button{border:0;background:transparent;padding:7px 11px;font-size:.78rem;font-weight:600;cursor:pointer;color:var(--muted);transition:.15s;font-family:var(--mono)}
+  .seg button.on{background:var(--text);color:var(--bg)}
+  .icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--surface);display:grid;place-items:center;cursor:pointer;color:var(--text-2);transition:.15s}
+  .icon-btn:hover{border-color:var(--line-2);color:var(--text)}
+  .icon-btn svg{width:17px;height:17px}
+  /* theme button shows the mode you would switch TO */
+  .sun,.moon{display:none}
+  html:not([data-theme="dark"]) .moon{display:block}
+  @media (prefers-color-scheme:dark){
+    html:not([data-theme]) .moon{display:none}
+    html:not([data-theme]) .sun{display:block}
+  }
+  html[data-theme="dark"] .moon{display:none}
+  html[data-theme="dark"] .sun{display:block}
+  .btn{display:inline-flex;align-items:center;gap:8px;font-size:.9rem;font-weight:600;padding:9px 15px;border-radius:10px;border:1px solid var(--line);background:var(--surface);cursor:pointer;color:var(--text);transition:.15s;white-space:nowrap}
+  .btn:hover{border-color:var(--line-2);transform:translateY(-1px)}
+  .btn svg{width:15px;height:15px}
+  .btn-primary{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+  .btn-primary:hover{background:var(--accent-2);border-color:var(--accent-2)}
+  .btn-lg{padding:13px 22px;font-size:.98rem;border-radius:12px}
+  @media (max-width:860px){.links{display:none}.nav .btn-gh span{display:none}}
+  @media (max-width:480px){.brand small{display:none}}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;padding:92px 0 64px;overflow:hidden}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:-1;
+    background:
+      radial-gradient(60% 50% at 85% 10%, color-mix(in srgb,var(--accent) 14%,transparent) 0%, transparent 70%),
+      linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:auto,48px 48px,48px 48px;
+    -webkit-mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 85%);mask-image:linear-gradient(to bottom,rgba(0,0,0,.55),transparent 85%)}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .85fr;gap:56px;align-items:center}
+  @media (max-width:900px){.hero-grid{grid-template-columns:1fr;gap:40px}.hero{padding:64px 0 48px}}
+  .avail{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text-2);padding:6px 12px 6px 9px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+  .avail i{width:7px;height:7px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 3px color-mix(in srgb,var(--ok) 22%,transparent)}
+  h1{margin-top:26px;font-size:clamp(2.3rem,5.4vw,4rem);line-height:1.04;letter-spacing:-.035em;font-weight:800;max-width:15ch;text-wrap:balance}
+  .lede{margin-top:22px;font-size:clamp(1.05rem,1.6vw,1.22rem);color:var(--muted);max-width:52ch;line-height:1.6;text-wrap:pretty}
+  .hero-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+  .link-arrow{display:inline-flex;align-items:center;gap:6px;font-weight:600;font-size:.95rem;color:var(--text-2);padding:13px 6px}
+  .link-arrow:hover{color:var(--accent)}
+  .link-arrow svg{width:15px;height:15px;transition:transform .15s}
+  .link-arrow:hover svg{transform:translateX(3px)}
+
+  .stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .stat{padding:22px 20px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow-sm)}
+  .stat .n{font-size:2.1rem;font-weight:700;letter-spacing:-.04em;line-height:1;font-variant-numeric:tabular-nums}
+  .stat .n small{font-size:1.1rem;font-weight:600;color:var(--muted);letter-spacing:-.01em;margin-left:2px}
+  .stat .l{color:var(--muted);font-size:.84rem;margin-top:10px;line-height:1.4}
+  @media (max-width:420px){.stats{grid-template-columns:1fr 1fr;gap:10px}.stat{padding:16px 14px}.stat .n{font-size:1.7rem}}
+
+  .stack{margin-top:60px;padding-top:26px;border-top:1px solid var(--line);display:flex;gap:10px 26px;flex-wrap:wrap;align-items:center}
+  .stack .lbl{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-right:6px}
+  .stack span:not(.lbl){font-family:var(--mono);font-size:.78rem;color:var(--text-2);opacity:.85}
+
+  /* ---------- sections ---------- */
+  .section{padding:88px 0 0}
+  @media (max-width:900px){.section{padding:64px 0 0}}
+  .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:36px}
+  .kicker{font-family:var(--mono);font-size:.74rem;color:var(--accent);letter-spacing:.08em;text-transform:uppercase;display:inline-flex;align-items:center;gap:10px}
+  .kicker::before{content:"";width:22px;height:1px;background:var(--accent)}
+  h2{font-size:clamp(1.65rem,3vw,2.25rem);letter-spacing:-.03em;font-weight:700;line-height:1.15;margin-top:12px;text-wrap:balance}
+  .sub{color:var(--muted);max-width:56ch;margin-top:12px;font-size:1.02rem;text-wrap:pretty}
+
+  /* pills + labels */
+  .tags{display:flex;flex-wrap:wrap;gap:6px}
+  .tag{font-family:var(--mono);font-size:.68rem;font-weight:500;color:var(--text-2);background:var(--bg);border:1px solid var(--line);padding:3px 8px;border-radius:6px;letter-spacing:.01em}
+  .status{position:absolute;top:12px;left:12px;z-index:2;font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;padding:5px 9px;border-radius:999px;background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--text);border:1px solid var(--line);backdrop-filter:blur(8px);display:inline-flex;align-items:center;gap:6px}
+  .status.live::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--ok)}
+  .ps{display:grid;gap:14px}
+  .ps p{color:var(--text-2);font-size:.95rem;line-height:1.65;text-wrap:pretty}
+  .ps .lbl{display:block;font-family:var(--mono);font-size:.66rem;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);margin-bottom:5px}
+  .ps b{font-weight:600;color:var(--text)}
+  .actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .note{font-size:.84rem;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+  .note svg{width:14px;height:14px}
+
+  /* ---------- case studies ---------- */
+  .cases{display:grid;gap:20px}
+  .case{display:grid;grid-template-columns:1.15fr 1fr;gap:40px;align-items:center;padding:24px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-sm);transition:box-shadow .25s,border-color .25s}
+  .case:hover{box-shadow:var(--shadow);border-color:var(--line-2)}
+  .case:nth-child(even) .case-media{order:2}
+  .case-media{position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);aspect-ratio:16/10;background:var(--bg-2)}
+  .case-media img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .case:hover .case-media img{transform:scale(1.025)}
+  .case-body{padding:8px 8px 8px 0}
+  .case:nth-child(even) .case-body{padding:8px 0 8px 8px}
+  .case h3{font-size:1.45rem;letter-spacing:-.025em;font-weight:700;margin:12px 0 14px;line-height:1.2}
+  .case .actions{margin-top:22px}
+  @media (max-width:900px){
+    .case{grid-template-columns:1fr;gap:20px;padding:16px}
+    .case:nth-child(even) .case-media{order:0}
+    .case-body,.case:nth-child(even) .case-body{padding:4px 6px 8px}
+  }
+
+  .more{margin-top:48px;display:flex;align-items:center;gap:16px}
+  .more h3{font-size:1.05rem;font-weight:600;letter-spacing:-.01em;white-space:nowrap}
+  .more::after{content:"";flex:1;height:1px;background:var(--line)}
+
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:22px}
+  @media (max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}}
+  .card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);overflow:hidden;box-shadow:var(--shadow-sm);transition:transform .25s,box-shadow .25s,border-color .25s}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line-2)}
+  .shot{position:relative;aspect-ratio:16/10;overflow:hidden;background:var(--bg-2);border-bottom:1px solid var(--line)}
+  .shot img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+  .card:hover .shot img{transform:scale(1.03)}
+  .card-body{padding:20px 20px 22px;display:flex;flex-direction:column;flex:1;gap:14px}
+  .card h3{font-size:1.12rem;letter-spacing:-.02em;font-weight:700;line-height:1.25}
+  .card .ps{flex:1;align-content:start}
+  .card .ps p{font-size:.9rem}
+  .card .actions{margin-top:4px}
+  .actions .btn{padding:8px 13px;font-size:.86rem}
+
+  /* ---------- architecture ---------- */
+  .arch{display:grid;grid-template-columns:1.25fr .85fr;gap:20px;align-items:stretch}
+  .arch>*,.pipeline>*,.case>*,.hero-grid>*{min-width:0}
+  @media (max-width:900px){.arch{grid-template-columns:1fr}}
+  .diagram{padding:26px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-sm);display:flex;flex-direction:column;justify-content:center}
+  .diagram-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+  @media (max-width:640px){.diagram-scroll{-webkit-mask-image:linear-gradient(90deg,#000 88%,transparent);mask-image:linear-gradient(90deg,#000 88%,transparent)}}
+  .diagram svg{width:100%;min-width:560px;height:auto}
+  .diagram .cap{font-family:var(--mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:14px;text-align:center}
+  .d-box{fill:var(--bg);stroke:var(--line-2);stroke-width:1.2}
+  .d-box.orch{fill:var(--accent);stroke:var(--accent)}
+  .d-box.human{fill:var(--surface);stroke:var(--accent);stroke-dasharray:4 3}
+  .d-t{font-size:13.5px;font-weight:600;fill:var(--text)}
+  .d-t.on{fill:var(--on-accent)}
+  .d-s{font-size:9.8px;fill:var(--muted);font-family:var(--mono)}
+  .d-s.on{fill:var(--on-accent);opacity:.8}
+  .d-line{fill:none;stroke:var(--line-2);stroke-width:1.5}
+  .d-flow{fill:none;stroke:var(--accent);stroke-width:1.5;stroke-dasharray:3 7;stroke-linecap:round;animation:flow 1.6s linear infinite;opacity:.9}
+  @keyframes flow{to{stroke-dashoffset:-20}}
+  @media (prefers-reduced-motion:reduce){.d-flow{animation:none}}
+  .d-arrow{fill:var(--line-2)}
+  .principles{display:grid;gap:12px}
+  .principle{padding:20px 22px;border:1px solid var(--line);border-radius:var(--r);background:var(--surface);box-shadow:var(--shadow-sm)}
+  .principle .num{font-family:var(--mono);color:var(--accent);font-size:.72rem;letter-spacing:.08em}
+  .principle h3{font-size:1.02rem;margin-top:8px;letter-spacing:-.015em;font-weight:650}
+  .principle p{color:var(--text-2);font-size:.9rem;margin-top:6px;line-height:1.6}
+
+  .pipeline{margin-top:20px;padding:24px 26px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-sm);display:grid;grid-template-columns:250px 1fr;gap:28px;align-items:center}
+  @media (max-width:900px){.pipeline{grid-template-columns:1fr;gap:18px}}
+  .pipeline h3{font-size:1.05rem;letter-spacing:-.015em;font-weight:650;margin-top:6px}
+  .pipeline .ex{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+  .pipeline p{color:var(--text-2);font-size:.9rem;margin-top:6px}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  @media (max-width:640px){.steps{grid-template-columns:1fr}}
+  .step{padding:14px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg);position:relative}
+  .step .num{font-family:var(--mono);font-size:.7rem;color:var(--accent);letter-spacing:.08em}
+  .step h4{font-size:.95rem;margin-top:6px;letter-spacing:-.01em;font-weight:650}
+  .step p{color:var(--muted);font-size:.84rem;margin-top:4px;line-height:1.5}
+  .arch-cta{margin-top:22px;display:flex;justify-content:center}
+
+  /* ---------- how I work ---------- */
+  .values{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  @media (max-width:900px){.values{grid-template-columns:1fr}}
+  .value{padding:26px;border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);box-shadow:var(--shadow-sm)}
+  .value .ico{width:40px;height:40px;border-radius:11px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+  .value .ico svg{width:19px;height:19px}
+  .value h3{font-size:1.1rem;margin-top:18px;letter-spacing:-.02em;font-weight:700}
+  .value p{color:var(--text-2);font-size:.93rem;margin-top:8px;line-height:1.65;text-wrap:pretty}
+  .caps{margin-top:20px;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line);border-radius:var(--r-lg);background:var(--surface);overflow:hidden;box-shadow:var(--shadow-sm)}
+  @media (max-width:900px){.caps{grid-template-columns:repeat(2,1fr)}}
+  .cap-item{padding:20px 22px;border-right:1px solid var(--line)}
+  .cap-item:last-child{border-right:0}
+  @media (max-width:900px){.cap-item:nth-child(2){border-right:0}.cap-item:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+  .cap-item .num{font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.08em}
+  .cap-item h4{font-size:.98rem;margin-top:6px;letter-spacing:-.01em;font-weight:650}
+  .cap-item p{font-size:.82rem;color:var(--muted);margin-top:4px}
+
+  /* ---------- contact ---------- */
+  .contact{padding:52px 56px;border-radius:var(--r-lg);background:var(--inv-bg);color:var(--inv-text);display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;position:relative;overflow:hidden}
+  .contact::after{content:"";position:absolute;right:-120px;top:-120px;width:380px;height:380px;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 45%,transparent),transparent 70%);pointer-events:none}
+  .contact .kicker{color:var(--inv-muted)}
+  .contact .kicker::before{background:var(--inv-muted)}
+  .contact h2{color:var(--inv-text)}
+  .contact p{color:var(--inv-muted);margin-top:14px;font-size:1.05rem;max-width:46ch;text-wrap:pretty}
+  .contact .actions{margin-top:28px}
+  .contact .btn{background:var(--inv-text);color:var(--inv-bg);border-color:var(--inv-text)}
+  .contact .btn.ghost{background:transparent;color:var(--inv-text);border-color:var(--inv-line)}
+  .contact .btn.ghost:hover{border-color:var(--inv-muted)}
+  .contact-side{position:relative;z-index:1;border-left:1px solid var(--inv-line);padding-left:36px;display:grid;gap:18px}
+  .contact-side .k{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--inv-muted)}
+  .contact-side .v{font-size:1rem;font-weight:600;margin-top:4px}
+  @media (max-width:900px){.contact{grid-template-columns:1fr;padding:36px 28px;gap:28px}.contact-side{border-left:0;padding-left:0;border-top:1px solid var(--inv-line);padding-top:24px;grid-template-columns:1fr 1fr}}
+
+  /* ---------- footer ---------- */
+  footer{margin-top:88px;padding:40px 0 48px;border-top:1px solid var(--line);color:var(--muted);font-size:.9rem}
+  .foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+  .foot .brand{color:var(--text)}
+  .foot-links{display:flex;gap:18px;flex-wrap:wrap}
+  .foot-links a{color:var(--text-2)}
+  .foot-links a:hover{color:var(--accent)}
+  .foot-meta{width:100%;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.82rem;margin-top:8px;padding-top:20px;border-top:1px solid var(--line)}
+
+  /* ---------- reveal ---------- */
+  html.js .reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.2,1)}
+  html.js .reveal.in{opacity:1;transform:none}
+  @media (prefers-reduced-motion:reduce){html.js .reveal{opacity:1;transform:none;transition:none}}
 </style>
 </head>
 <body>
-<header>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-gh" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2.2c-3.3.7-4-1.4-4-1.4-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.8-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.3 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .5z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="m10 8 5 3-5 3z"/></symbol>
+    <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M5 21h14M3 7h18M6 7l-3 7a3 3 0 0 0 6 0L6 7zM18 7l-3 7a3 3 0 0 0 6 0l-3-7z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+  </defs>
+</svg>
+
+<header class="site-header" id="top">
   <div class="wrap nav">
-    <div class="brand"><span class="dot">●</span></div>
+    <a class="brand" href="#top" aria-label="Lorenz — Start">
+      <span class="mark">L</span>
+      <span>Lorenz<small><span data-de>KI-Entwickler & Builder</span><span data-en>AI Developer & Builder</span></small></span>
+    </a>
+    <nav class="links" aria-label="Navigation">
+      <a href="#projekte"><span data-de>Projekte</span><span data-en>Projects</span></a>
+      <a href="#agenten"><span data-de>Agenten</span><span data-en>Agents</span></a>
+      <a href="#arbeitsweise"><span data-de>Arbeitsweise</span><span data-en>How I work</span></a>
+      <a href="#kontakt"><span data-de>Kontakt</span><span data-en>Contact</span></a>
+    </nav>
     <div class="nav-right">
-      <div class="lang" role="group" aria-label="Sprache / Language">
-        <button id="de" class="on" onclick="setLang('de')">DE</button>
-        <button id="en" onclick="setLang('en')">EN</button>
+      <div class="seg" role="group" aria-label="Sprache / Language">
+        <button id="lang-de" class="on" onclick="setLang('de')" aria-pressed="true">DE</button>
+        <button id="lang-en" onclick="setLang('en')" aria-pressed="false">EN</button>
       </div>
-      <a class="btn" href="https://github.com/usr1243" target="_blank" rel="noopener">GitHub</a>
+      <button class="icon-btn" id="theme" onclick="toggleTheme()" aria-label="Theme wechseln / Toggle theme">
+        <svg class="sun"><use href="#i-sun"/></svg>
+        <svg class="moon"><use href="#i-moon"/></svg>
+      </button>
+      <a class="btn btn-gh" href="https://github.com/usr1243" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg><span>GitHub</span></a>
     </div>
   </div>
 </header>
 
-<main class="wrap">
+<main>
+  <!-- ================= HERO ================= -->
   <section class="hero">
-    <div class="eyebrow"><span data-de>KI-Entwickler & Builder · Schweiz</span><span data-en>AI Developer & Builder · Switzerland</span></div>
-    <h1>
-      <span data-de>Ich baue KI-Produkte, die man anfassen kann.</span>
-      <span data-en>I build AI products you can actually click.</span>
-    </h1>
-    <p class="lede">
-      <span data-de>Von Multi-Agenten-Systemen über Web-Apps bis zu Desktop-Software — Projekte, die wirklich laufen. Unten kannst du fast alles live ausprobieren.</span>
-      <span data-en>From multi-agent systems to web apps and desktop software — projects that actually run. You can try most of them live below.</span>
-    </p>
-    <div class="hero-cta">
-      <a class="cta primary" href="#projekte"><span data-de>Projekte ansehen</span><span data-en>See the projects</span></a>
-      <a class="cta" href="#agenten"><span data-de>KI-Agenten-Architektur</span><span data-en>AI agent architecture</span></a>
+    <div class="wrap">
+      <div class="hero-grid">
+        <div>
+          <span class="avail"><i></i><span data-de>Verfügbar für Projekte · Schweiz</span><span data-en>Available for projects · Switzerland</span></span>
+          <h1>
+            <span data-de>Ich baue <span style="white-space:nowrap">KI-Produkte</span>, die man anfassen kann.</span>
+            <span data-en>I build AI products you can actually click.</span>
+          </h1>
+          <p class="lede">
+            <span data-de>Multi-Agenten-Systeme, Web-Apps und Desktop-Software für echte Probleme — vom ersten Prototyp bis zum Betrieb. Fast alles hier läuft live und lässt sich direkt ausprobieren.</span>
+            <span data-en>Multi-agent systems, web apps and desktop software for real problems — from first prototype to production. Almost everything here runs live and can be tried right away.</span>
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary btn-lg" href="#projekte"><span data-de>Projekte ansehen</span><span data-en>See the projects</span></a>
+            <a class="link-arrow" href="#agenten"><span data-de>Wie meine Agenten funktionieren</span><span data-en>How my agents work</span><svg><use href="#i-arrow"/></svg></a>
+          </div>
+        </div>
+        <div class="stats" aria-label="Kennzahlen">
+          <div class="stat"><div class="n">9</div><div class="l"><span data-de>Projekte, von PWA bis Desktop-App</span><span data-en>projects, from PWA to desktop app</span></div></div>
+          <div class="stat"><div class="n">6</div><div class="l"><span data-de>davon live zum Ausprobieren</span><span data-en>of them live to try out</span></div></div>
+          <div class="stat"><div class="n">1</div><div class="l"><span data-de>Kundenprojekt im täglichen Einsatz</span><span data-en>client project in daily use</span></div></div>
+          <div class="stat"><div class="n">2.5–3.5<small>h</small></div><div class="l"><span data-de>pro Tag gespart, pro Praxisassistenz</span><span data-en>saved per day, per practice assistant</span></div></div>
+        </div>
+      </div>
+      <div class="stack" aria-label="Tech-Stack">
+        <span class="lbl">Stack</span>
+        <span>TypeScript</span><span>Next.js</span><span>React</span><span>Cloudflare Workers</span><span>Supabase</span><span>Prisma</span><span>Electron</span><span>Python</span><span>Ollama</span><span>Claude Code</span><span>Docker</span><span>PWA</span>
+      </div>
     </div>
   </section>
 
+  <!-- ================= PROJECTS ================= -->
   <section class="section" id="projekte">
-    <h2><span data-de>Ausgewählte Projekte</span><span data-en>Selected projects</span></h2>
-    <p class="sub"><span data-de>Klick dich rein — die meisten laufen live.</span><span data-en>Click in — most are live.</span></p>
-    <div class="grid" id="grid"></div>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="kicker">01 — <span data-de>Projekte</span><span data-en>Projects</span></span>
+          <h2><span data-de>Ausgewählte Projekte</span><span data-en>Selected projects</span></h2>
+          <p class="sub"><span data-de>Jedes Projekt beginnt mit einem konkreten Problem. Die meisten laufen live — klick dich rein.</span><span data-en>Every project starts with a concrete problem. Most of them run live — click in.</span></p>
+        </div>
+      </div>
+
+      <div class="cases">
+        <!-- Filmtracker -->
+        <article class="case reveal">
+          <a class="case-media" href="https://filmtracker-public.questside.workers.dev/landing" target="_blank" rel="noopener" aria-label="Filmtracker live">
+            <span class="status live">Live</span>
+            <picture><source srcset="assets/filmtracker.webp" type="image/webp"><img src="assets/filmtracker.png" width="1200" height="750" alt="Filmtracker — Film-Bibliothek mit Postern, Filtern und Suche"></picture>
+          </a>
+          <div class="case-body">
+            <div class="tags"><span class="tag">Cloudflare Worker</span><span class="tag">KV</span><span class="tag">TMDb API</span><span class="tag">Auth</span></div>
+            <h3>Filmtracker</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>Die meisten führen ihre Filme in einer Excel-Liste oder gar nicht — Titel raussuchen, Genre und Jahr von Hand eintragen, kein Poster, nichts durchsuchbar.</span><span data-en>Most people track films in a spreadsheet or not at all — looking up titles, typing genre and year by hand, no posters, nothing searchable.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Eine öffentliche Film-Datenbank: eigenes Konto anlegen und direkt <b>über die TMDb-API</b> nach Filmen suchen — Poster, Genre und Beschreibung kommen automatisch mit. Jede Bibliothek ist privat. Login selbst gebaut (PBKDF2 + signierte Session-Cookies, kein Auth-Anbieter).</span><span data-en>A public movie database: create your own account and search films directly <b>via the TMDb API</b> — poster, genre and description come automatically. Every library is private. Login built from scratch (PBKDF2 + signed session cookies, no auth provider).</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://filmtracker-public.questside.workers.dev/landing" target="_blank" rel="noopener"><span data-de>Live ansehen</span><span data-en>View live</span><svg><use href="#i-ext"/></svg></a>
+              <a class="btn" href="https://github.com/usr1243/filmtracker-public" target="_blank" rel="noopener">Code<svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Claude Agent Toolkit -->
+        <article class="case reveal">
+          <a class="case-media" href="https://github.com/usr1243/claude-agent-toolkit" target="_blank" rel="noopener" aria-label="Claude Agent Toolkit auf GitHub">
+            <span class="status"><span data-de>KI · Open Source</span><span data-en>AI · Open source</span></span>
+            <img src="assets/agents-cover.svg" width="1200" height="750" alt="Diagramm: Orchestrator-Agent steuert fünf Sub-Agenten">
+          </a>
+          <div class="case-body">
+            <div class="tags"><span class="tag">Claude Code</span><span class="tag">Multi-Agent</span><span class="tag"><span data-de>Orchestrierung</span><span data-en>Orchestration</span></span></div>
+            <h3>Claude Agent Toolkit</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>„KI-Agent“ klingt nach Magie — dabei steckt echte Architektur dahinter, die man den fertigen Antworten nicht ansieht.</span><span data-en>“AI agent” sounds like magic — yet there's real architecture behind it that the finished answers don't reveal.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de><b>5 selbstgebaute KI-Agenten</b>, jeder offen erklärt (welches Alltagsproblem, wie gebaut) — inklusive mehrschichtiger Orchestrierung, bei der ein Agent weitere Sub-Agenten parallel steuert: Coaches, Deep-Debug, Bewerbung, Prompt-Improver, Skillcheck.</span><span data-en><b>5 self-built AI agents</b>, each explained openly (which everyday problem, how it's built) — including multi-layer orchestration where one agent coordinates sub-agents in parallel: coaches, deep-debug, application assistant, prompt improver, skill checker.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://github.com/usr1243/claude-agent-toolkit" target="_blank" rel="noopener"><span data-de>Repo ansehen</span><span data-en>View repo</span><svg><use href="#i-ext"/></svg></a>
+              <a class="link-arrow" href="#agenten" style="padding:8px 4px;font-size:.88rem"><span data-de>Architektur unten</span><span data-en>Architecture below</span><svg><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- MedDoc Analyzer -->
+        <article class="case reveal">
+          <div class="case-media">
+            <span class="status"><span data-de>Kundenprojekt</span><span data-en>Client project</span></span>
+            <picture><source srcset="assets/meddoc.webp" type="image/webp"><img src="assets/meddoc.png" width="1200" height="750" loading="lazy" alt="MedDoc Analyzer — Posteingang mit automatisch erkannten Berichtsdaten" ></picture>
+          </div>
+          <div class="case-body">
+            <div class="tags"><span class="tag">Electron</span><span class="tag">React</span><span class="tag"><span data-de>Lokale KI (Ollama)</span><span data-en>Local AI (Ollama)</span></span><span class="tag">OCR</span></div>
+            <h3>MedDoc Analyzer</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>In einer Arztpraxis landen täglich dutzende Berichte anderer Ärzte — jeder muss gelesen, einsortiert und richtig benannt abgelegt werden, und Patientendaten dürfen dafür das Haus nicht verlassen.</span><span data-en>A medical practice receives dozens of reports from other doctors every day — each must be read, sorted and filed under the right name, and patient data must not leave the building to do it.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Eine Desktop-App für eine <b>Schweizer Arztpraxis-Kette</b>, in der eine lokale KI (Ollama, komplett offline — keine Cloud) jeden Bericht analysiert, kategorisiert und ablagebereit benennt. Spart pro Praxisassistenz <b>ca. 2,5–3,5 Stunden pro Tag</b>.</span><span data-en>A desktop app for a <b>Swiss medical practice group</b> where a local AI (Ollama, fully offline — no cloud) analyses, categorises and names every report ready for filing. Saves each assistant <b>~2.5–3.5 hours per day</b>.</span></p>
+            </div>
+            <div class="actions">
+              <span class="note"><svg><use href="#i-lock"/></svg><span data-de>Code nicht öffentlich — Kundenprojekt. Case-Study auf Anfrage.</span><span data-en>Code not public — client project. Case study on request.</span></span>
+            </div>
+          </div>
+        </article>
+
+        <!-- HandwerkOS -->
+        <article class="case reveal">
+          <a class="case-media" href="https://handwerkos-app.vercel.app" target="_blank" rel="noopener" aria-label="HandwerkOS live">
+            <span class="status live"><span data-de>KI-Agenten · Live</span><span data-en>AI agents · Live</span></span>
+            <picture><source srcset="assets/handwerkos.webp" type="image/webp"><img src="assets/handwerkos.png" width="1200" height="750" loading="lazy" alt="HandwerkOS — Eingang & Pipeline mit Anfragen zur Freigabe"></picture>
+          </a>
+          <div class="case-body">
+            <div class="tags"><span class="tag">Next.js</span><span class="tag">TypeScript</span><span class="tag"><span data-de>KI-Agenten</span><span data-en>AI agents</span></span><span class="tag">Prisma</span></div>
+            <h3>HandwerkOS</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>In einem kleinen Handwerksbetrieb bleibt die halbe Büroarbeit — Offerten, Termine, Nachfass, Rechnungen — abends am Inhaber hängen.</span><span data-en>In a small trade business, half the back-office — quotes, scheduling, follow-ups, invoices — ends up on the owner's evening.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Ein <b>Backoffice aus KI-Agenten</b>. Ein Orchestrator liest jede Anfrage und gibt sie an den richtigen Spezialisten weiter, fachlich korrekt nach Schweizer Recht — und <b>nichts geht raus ohne Freigabe</b>. Demo-Login vorausgefüllt.</span><span data-en>A <b>back-office made of AI agents</b>. An orchestrator reads every request and routes it to the right specialist, correct under Swiss law — and <b>nothing goes out without approval</b>. Demo login pre-filled.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://handwerkos-app.vercel.app" target="_blank" rel="noopener"><span data-de>Demo öffnen</span><span data-en>Open demo</span><svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="more reveal"><h3><span data-de>Weitere Projekte</span><span data-en>More projects</span></h3></div>
+
+      <div class="grid">
+        <!-- Passerelle -->
+        <article class="card reveal">
+          <a class="shot" href="https://usr1243.github.io/passerelle-lerntool/passerelle_lerntool.html" target="_blank" rel="noopener" aria-label="Passerelle Lerntool live">
+            <span class="status live">Live</span>
+            <picture><source srcset="assets/passerelle.webp" type="image/webp"><img src="assets/passerelle.png" width="1200" height="750" loading="lazy" alt="Passerelle Lerntool"></picture>
+          </a>
+          <div class="card-body">
+            <div class="tags"><span class="tag">PWA</span><span class="tag">Cloudflare</span><span class="tag"><span data-de>Groq KI</span><span data-en>Groq AI</span></span><span class="tag">Spaced Repetition</span></div>
+            <h3>Passerelle Lerntool</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>Wer neben dem Job auf die Schweizer Passerelle-Prüfung lernt, muss in kurzer Zeit viel Stoff über mehrere Fächer bewältigen — verstreut über Stoffplan, Karteikarten, Timer und Zusammenfassungen in fünf verschiedenen Apps.</span><span data-en>Studying for the Swiss Passerelle exam alongside a job means covering a lot of material across several subjects fast — scattered across a syllabus, flashcards, timers and summaries in five different apps.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Eine Lern-App, die alles zusammenbringt: Stoffplan, <b>Karteikarten mit Spaced Repetition</b>, Pomodoro und ein KI-Assistent, der aus eigenem Stoff Zusammenfassungen und Quizfragen macht. Kein Login, läuft offline.</span><span data-en>One study app that brings it together: syllabus, <b>spaced-repetition flashcards</b>, Pomodoro and an AI assistant that turns your own material into summaries and quizzes. No login, works offline.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://usr1243.github.io/passerelle-lerntool/passerelle_lerntool.html" target="_blank" rel="noopener"><span data-de>Live ansehen</span><span data-en>View live</span><svg><use href="#i-ext"/></svg></a>
+              <a class="btn" href="https://github.com/usr1243/passerelle-lerntool" target="_blank" rel="noopener">Code<svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Questside -->
+        <article class="card reveal">
+          <a class="shot" href="https://questside.app" target="_blank" rel="noopener" aria-label="Questside live">
+            <span class="status live">Live</span>
+            <picture><source srcset="assets/sidequest.webp" type="image/webp"><img src="assets/sidequest.png" width="1200" height="750" loading="lazy" alt="Questside"></picture>
+          </a>
+          <div class="card-body">
+            <div class="tags"><span class="tag">PWA</span><span class="tag">Supabase</span><span class="tag">Gamification</span></div>
+            <h3>Questside</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>Viele in meiner Generation verbringen enorm viel Zeit auf Instagram und TikTok — und erleben dabei wenig real mit Freunden. Ging mir selbst so: gelangweilt, ohne zu wissen, was ich mit meiner Zeit anfangen soll.</span><span data-en>A lot of people my age spend huge amounts of time on Instagram and TikTok — and experience very little for real with friends. I had the same problem: bored, not knowing what to do with my time.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Questside gibt dir jede Woche echte <b>Quests</b> aus 500+ Mini-Challenges — Aufgaben, bei denen du wirklich etwas erlebst statt zu scrollen. XP, Level und ein Freunde-Leaderboard machen dranbleiben leichter. Ich nutze es selbst mit ein paar Freunden.</span><span data-en>Questside gives you real <b>quests</b> every week from 500+ mini-challenges — tasks where you actually go do something instead of scrolling. XP, levels and a friends leaderboard make it easier to stick with. I use it myself, together with a few friends.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://questside.app" target="_blank" rel="noopener"><span data-de>Live ansehen</span><span data-en>View live</span><svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Moto Weather Route -->
+        <article class="card reveal">
+          <a class="shot" href="https://usr1243.github.io/motoweather/" target="_blank" rel="noopener" aria-label="Moto Weather Route live">
+            <span class="status live">Live</span>
+            <picture><source srcset="assets/motoweather.webp" type="image/webp"><img src="assets/motoweather.png" width="1200" height="750" loading="lazy" alt="Moto Weather Route"></picture>
+          </a>
+          <div class="card-body">
+            <div class="tags"><span class="tag">Vanilla JS</span><span class="tag">Leaflet</span><span class="tag">OpenRouteService</span><span class="tag">Open-Meteo</span></div>
+            <h3>Moto Weather Route</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>Vor einer Motorradtour schaut man das Wetter am Ziel nach — und fährt unterwegs trotzdem in einen Regenschauer, den kein Blick aufs Ziel verrät.</span><span data-en>Before a ride you check the weather at the destination — and still ride into a shower on the way that the destination never showed.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Ein Wetter-Tool, das das Wetter <b>entlang der ganzen Route</b> zur Fahrtzeit prüft, nicht nur am Ziel. Kombiniert Routing (OpenRouteService) und Wetter (Open-Meteo) auf einer Karte.</span><span data-en>A weather tool that checks conditions <b>along the whole route</b> at ride time, not just at the destination. Combines routing (OpenRouteService) and weather (Open-Meteo) on one map.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://usr1243.github.io/motoweather/" target="_blank" rel="noopener"><span data-de>Live ansehen</span><span data-en>View live</span><svg><use href="#i-ext"/></svg></a>
+              <a class="btn" href="https://github.com/usr1243/motoweather" target="_blank" rel="noopener">Code<svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Budget Tracker CH -->
+        <article class="card reveal">
+          <a class="shot" href="https://budgetplaner.questside.workers.dev" target="_blank" rel="noopener" aria-label="Budget Tracker CH live">
+            <span class="status live">Live</span>
+            <picture><source srcset="assets/budget-tracker.webp" type="image/webp"><img src="assets/budget-tracker.png" width="1200" height="843" loading="lazy" alt="Budget Tracker CH"></picture>
+          </a>
+          <div class="card-body">
+            <div class="tags"><span class="tag">Cloudflare</span><span class="tag">iOS Shortcuts</span><span class="tag">Apple Pay</span><span class="tag">PWA</span></div>
+            <h3>Budget Tracker CH</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>Fast jede Budget-App scheitert am selben Punkt — man muss jede Ausgabe von Hand eintippen, vergisst es nach drei Tagen, und die Übersicht ist wertlos.</span><span data-en>Almost every budgeting app fails at the same point — you type in every expense by hand, forget after three days, and the overview is worthless.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Ein Budget-Tracker für die Schweiz, bei dem sich <b>Ausgaben von selbst erfassen</b>. Ein iOS-Kurzbefehl wird bei jeder Apple-Pay-Zahlung ausgelöst und bucht Betrag und Händler automatisch — kein Eintippen.</span><span data-en>A budget tracker for Switzerland where <b>expenses record themselves</b>. An iOS Shortcut fires on every Apple Pay payment and books amount and merchant automatically — no typing.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://budgetplaner.questside.workers.dev" target="_blank" rel="noopener"><span data-de>Live ansehen</span><span data-en>View live</span><svg><use href="#i-ext"/></svg></a>
+              <a class="btn" href="https://github.com/usr1243/budget-tracker" target="_blank" rel="noopener">Code<svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Crypto Signal Bot -->
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/usr1243/crypto-signal-bot" target="_blank" rel="noopener" aria-label="Crypto Signal Bot auf GitHub">
+            <span class="status">Open Source</span>
+            <picture><source srcset="assets/crypto-signal-bot.webp" type="image/webp"><img src="assets/crypto-signal-bot.png" width="1200" height="750" loading="lazy" alt="Crypto Signal Bot — Telegram-Signal"></picture>
+          </a>
+          <div class="card-body">
+            <div class="tags"><span class="tag">Python</span><span class="tag">freqtrade</span><span class="tag">Docker</span><span class="tag">Telegram</span><span class="tag">pytest</span></div>
+            <h3>Crypto Signal Bot</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>Ein befreundeter Trader kennt die Märkte, hat aber nicht die Zeit, den ganzen Tag Charts zu beobachten und selbst am Bildschirm zu sitzen.</span><span data-en>A trader friend knows the markets but doesn't have time to watch charts all day and sit at the screen himself.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Ein Bot, der die <b>Rolle des Traders übernimmt</b> — rund um die Uhr Setups bewerten wie ein erfahrener Trader (~25 Indikatoren, 16 Chart-Muster); ein LLM darf dabei nur bremsen, nie selbst entscheiden. Läuft auf <b>freqtrade</b>. Ehrlich vermessen: aktuell <b>keine bewiesene Kante nach Gebühren</b> — steht im Repo genauso wie die Erfolge.</span><span data-en>A bot that <b>takes over the trader's role</b> — evaluating setups around the clock like an experienced trader would (~25 indicators, 16 chart patterns); an LLM may only veto, never decide. Runs on <b>freqtrade</b>. Measured honestly: currently <b>no proven edge after fees</b> — reported in the repo just like the wins.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/usr1243/crypto-signal-bot" target="_blank" rel="noopener">Code<svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Roulette -->
+        <article class="card reveal">
+          <a class="shot" href="https://github.com/usr1243/roulette-simulator" target="_blank" rel="noopener" aria-label="Roulette Strategy Simulator auf GitHub">
+            <span class="status"><span data-de>Spass-Projekt</span><span data-en>Fun project</span></span>
+            <picture><source srcset="assets/roulette.webp" type="image/webp"><img src="assets/roulette.png" width="1200" height="675" loading="lazy" alt="Roulette Strategy Simulator"></picture>
+          </a>
+          <div class="card-body">
+            <div class="tags"><span class="tag">Vanilla JS</span><span class="tag"><span data-de>Wahrscheinlichkeit</span><span data-en>Probability</span></span></div>
+            <h3>Roulette Strategy Simulator</h3>
+            <div class="ps">
+              <p><span class="lbl">Problem</span><span data-de>„Mit diesem Wettsystem kannst du im Casino nicht verlieren“ — klingt überzeugend, und kaum jemand rechnet nach, warum es trotzdem nicht stimmt.</span><span data-en>“With this betting system you can't lose at the casino” — sounds convincing, and few people do the math on why it still isn't true.</span></p>
+              <p><span class="lbl"><span data-de>Lösung</span><span data-en>Solution</span></span><span data-de>Ein kleines Wochenend-Projekt über <b>Wahrscheinlichkeit</b>: Der Simulator lässt Systeme wie Martingale und Fibonacci über tausende simulierte Spins laufen — und zeigt sichtbar, warum keines den Hausvorteil schlägt.</span><span data-en>A small weekend project about <b>probability</b>: the simulator runs systems like Martingale and Fibonacci over thousands of simulated spins — visibly showing why none beats the house edge.</span></p>
+            </div>
+            <div class="actions">
+              <a class="btn" href="https://github.com/usr1243/roulette-simulator" target="_blank" rel="noopener">Code<svg><use href="#i-ext"/></svg></a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
   </section>
 
+  <!-- ================= AGENT ARCHITECTURE ================= -->
   <section class="section" id="agenten">
-    <h2><span data-de>Wie meine KI-Agenten aufgebaut sind</span><span data-en>How my AI agents are built</span></h2>
-    <p class="sub"><span data-de>Das Spannende ist die Architektur: Ein Orchestrator-Agent steuert mehrere Sub-Agenten gleichzeitig.</span><span data-en>The interesting part is the architecture: an orchestrator agent coordinates several sub-agents at once.</span></p>
-    <div class="arch">
-      <div class="flow">
-        <div class="node orch"><span data-de>Orchestrator-Agent</span><span data-en>Orchestrator agent</span></div>
-        <div class="arrow">→</div>
-        <div class="subs">
-          <div class="node"><span data-de>Sub-Agent A</span><span data-en>Sub-agent A</span></div>
-          <div class="node"><span data-de>Sub-Agent B</span><span data-en>Sub-agent B</span></div>
-          <div class="node"><span data-de>Sub-Agent C</span><span data-en>Sub-agent C</span></div>
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="kicker">02 — <span data-de>Architektur</span><span data-en>Architecture</span></span>
+          <h2><span data-de>Wie meine KI-Agenten aufgebaut sind</span><span data-en>How my AI agents are built</span></h2>
+          <p class="sub"><span data-de>Statt eines Agenten, der alles versucht: Ein Orchestrator verteilt die Arbeit an Spezialisten, die parallel laufen — und ein Mensch gibt am Ende frei.</span><span data-en>Instead of one agent trying to do everything: an orchestrator hands the work to specialists that run in parallel — and a human signs off at the end.</span></p>
         </div>
-        <div class="arrow">→</div>
-        <div class="node"><span data-de>Ergebnis</span><span data-en>Result</span></div>
       </div>
-      <p class="note">
-        <span data-de>Statt eines Agenten, der alles versucht, lässt ein Orchestrator ein <b>Team von Spezialisten parallel</b> arbeiten — jeder lädt nur sein eigenes Wissen. Mein Debugging-Agent geht sogar über 5 Phasen: ein Agent kartografiert den Code, ein Schwarm analysiert, ein zweiter Schwarm behebt die Fehler.</span>
-        <span data-en>Instead of one agent doing everything, an orchestrator runs a <b>team of specialists in parallel</b> — each loading only its own knowledge. My debugging agent even runs 5 phases: one agent maps the code, a swarm analyses, a second swarm fixes the bugs.</span>
-      </p>
-      <div class="links" style="justify-content:center">
-        <a class="lnk live" href="https://github.com/usr1243/claude-agent-toolkit" target="_blank" rel="noopener"><span data-de>Architektur & Diagramme ansehen</span><span data-en>See architecture & diagrams</span></a>
+
+      <div class="arch">
+        <div class="diagram reveal">
+          <div class="diagram-scroll">
+          <svg viewBox="0 0 752 340" role="img" aria-label="Orchestrator-Architektur: Anfrage → Orchestrator → drei parallele Spezialisten → Ergebnis mit Freigabe">
+            <defs>
+              <marker id="d-ar" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,1 L6,4 L0,7z" class="d-arrow"/></marker>
+            </defs>
+            <!-- connectors (static) -->
+            <g class="d-line" marker-end="url(#d-ar)">
+              <path d="M148,170 L194,170"/>
+              <path d="M366,170 C392,170 392,68 412,68"/>
+              <path d="M366,170 L412,170"/>
+              <path d="M366,170 C392,170 392,272 412,272"/>
+              <path d="M584,68 C608,68 608,170 628,170"/>
+              <path d="M584,170 L628,170"/>
+              <path d="M584,272 C608,272 608,170 628,170"/>
+            </g>
+            <!-- animated flow overlay -->
+            <g class="d-flow">
+              <path d="M148,170 L194,170"/>
+              <path d="M366,170 C392,170 392,68 412,68"/>
+              <path d="M366,170 L412,170"/>
+              <path d="M366,170 C392,170 392,272 412,272"/>
+              <path d="M584,68 C608,68 608,170 628,170"/>
+              <path d="M584,170 L628,170"/>
+              <path d="M584,272 C608,272 608,170 628,170"/>
+            </g>
+            <!-- request -->
+            <rect class="d-box" x="12" y="146" width="136" height="48" rx="10"/>
+            <text class="d-t" x="80" y="166" text-anchor="middle" data-de>Anfrage</text>
+            <text class="d-t" x="80" y="166" text-anchor="middle" data-en>Request</text>
+            <text class="d-s" x="80" y="182" text-anchor="middle" data-de>E-Mail · Formular</text>
+            <text class="d-s" x="80" y="182" text-anchor="middle" data-en>e-mail · form</text>
+            <!-- orchestrator -->
+            <rect class="d-box orch" x="196" y="134" width="170" height="72" rx="12"/>
+            <text class="d-t on" x="281" y="166" text-anchor="middle">Orchestrator</text>
+            <text class="d-s on" x="281" y="186" text-anchor="middle" data-de>verteilt · sammelt ein</text>
+            <text class="d-s on" x="281" y="186" text-anchor="middle" data-en>routes · merges</text>
+            <!-- specialists -->
+            <g>
+              <rect class="d-box" x="414" y="40" width="170" height="56" rx="11"/>
+              <text class="d-t" x="499" y="63" text-anchor="middle" data-de>Spezialist A</text>
+              <text class="d-t" x="499" y="63" text-anchor="middle" data-en>Specialist A</text>
+              <text class="d-s" x="499" y="81" text-anchor="middle" data-de>eigenes Wissen · parallel</text>
+              <text class="d-s" x="499" y="81" text-anchor="middle" data-en>own knowledge · parallel</text>
+              <rect class="d-box" x="414" y="142" width="170" height="56" rx="11"/>
+              <text class="d-t" x="499" y="165" text-anchor="middle" data-de>Spezialist B</text>
+              <text class="d-t" x="499" y="165" text-anchor="middle" data-en>Specialist B</text>
+              <text class="d-s" x="499" y="183" text-anchor="middle" data-de>eigenes Wissen · parallel</text>
+              <text class="d-s" x="499" y="183" text-anchor="middle" data-en>own knowledge · parallel</text>
+              <rect class="d-box" x="414" y="244" width="170" height="56" rx="11"/>
+              <text class="d-t" x="499" y="267" text-anchor="middle" data-de>Spezialist C</text>
+              <text class="d-t" x="499" y="267" text-anchor="middle" data-en>Specialist C</text>
+              <text class="d-s" x="499" y="285" text-anchor="middle" data-de>eigenes Wissen · parallel</text>
+              <text class="d-s" x="499" y="285" text-anchor="middle" data-en>own knowledge · parallel</text>
+            </g>
+            <!-- result + human approval -->
+            <rect class="d-box human" x="630" y="134" width="110" height="72" rx="12"/>
+            <text class="d-t" x="685" y="166" text-anchor="middle" data-de>Ergebnis</text>
+            <text class="d-t" x="685" y="166" text-anchor="middle" data-en>Result</text>
+            <text class="d-s" x="685" y="186" text-anchor="middle" data-de>Mensch gibt frei</text>
+            <text class="d-s" x="685" y="186" text-anchor="middle" data-en>human sign-off</text>
+          </svg>
+          </div>
+          <div class="cap"><span data-de>Orchestrator-Muster · eingesetzt in HandwerkOS und im Agent Toolkit</span><span data-en>Orchestrator pattern · used in HandwerkOS and the Agent Toolkit</span></div>
+        </div>
+
+        <div class="principles">
+          <div class="principle reveal">
+            <div class="num">01</div>
+            <h3><span data-de>Spezialisten statt Generalist</span><span data-en>Specialists over generalists</span></h3>
+            <p><span data-de>Jeder Sub-Agent lädt nur das Wissen, das er für seine Aufgabe braucht. Weniger Kontext, präzisere Antworten.</span><span data-en>Each sub-agent loads only the knowledge its task needs. Less context, sharper answers.</span></p>
+          </div>
+          <div class="principle reveal">
+            <div class="num">02</div>
+            <h3><span data-de>Parallel statt nacheinander</span><span data-en>Parallel, not sequential</span></h3>
+            <p><span data-de>Der Orchestrator liest die Anfrage, verteilt sie an die Spezialisten und führt die Teilergebnisse zusammen.</span><span data-en>The orchestrator reads the request, distributes it to the specialists and merges the partial results.</span></p>
+          </div>
+          <div class="principle reveal">
+            <div class="num">03</div>
+            <h3><span data-de>Der Mensch gibt frei</span><span data-en>Humans sign off</span></h3>
+            <p><span data-de>Nichts geht ohne Freigabe raus. Ein LLM darf bremsen — aber nie allein entscheiden.</span><span data-en>Nothing goes out without approval. An LLM may veto — but never decides alone.</span></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="pipeline reveal">
+        <div>
+          <div class="ex"><span data-de>Beispiel · Deep-Debug-Agent</span><span data-en>Example · deep-debug agent</span></div>
+          <h3><span data-de>Debugging in 5 Phasen</span><span data-en>Debugging in 5 phases</span></h3>
+          <p><span data-de>Mehrschichtige Orchestrierung: Agenten, die selbst wieder Schwärme von Agenten steuern. Die drei Kernphasen:</span><span data-en>Multi-layer orchestration: agents that in turn coordinate swarms of agents. The three core phases:</span></p>
+        </div>
+        <div class="steps">
+          <div class="step"><div class="num">01</div><h4><span data-de>Kartografieren</span><span data-en>Map</span></h4><p><span data-de>Ein Agent erfasst die Struktur der Codebasis.</span><span data-en>One agent charts the structure of the codebase.</span></p></div>
+          <div class="step"><div class="num">02</div><h4><span data-de>Analysieren</span><span data-en>Analyse</span></h4><p><span data-de>Ein Schwarm von Agenten sucht parallel nach Fehlern.</span><span data-en>A swarm of agents hunts for bugs in parallel.</span></p></div>
+          <div class="step"><div class="num">03</div><h4><span data-de>Beheben</span><span data-en>Fix</span></h4><p><span data-de>Ein zweiter Schwarm behebt die gefundenen Fehler.</span><span data-en>A second swarm fixes what was found.</span></p></div>
+        </div>
+      </div>
+
+      <div class="arch-cta reveal">
+        <a class="btn btn-lg" href="https://github.com/usr1243/claude-agent-toolkit" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg><span data-de>Architektur & Diagramme auf GitHub</span><span data-en>Architecture & diagrams on GitHub</span><svg><use href="#i-ext"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= HOW I WORK ================= -->
+  <section class="section" id="arbeitsweise">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div>
+          <span class="kicker">03 — <span data-de>Arbeitsweise</span><span data-en>How I work</span></span>
+          <h2><span data-de>Wie ich arbeite</span><span data-en>How I work</span></h2>
+          <p class="sub"><span data-de>Drei Grundsätze, die sich durch alle Projekte ziehen.</span><span data-en>Three principles that run through every project.</span></p>
+        </div>
+      </div>
+      <div class="values">
+        <div class="value reveal">
+          <div class="ico"><svg><use href="#i-target"/></svg></div>
+          <h3><span data-de>Problem zuerst</span><span data-en>Problem first</span></h3>
+          <p><span data-de>Kein Projekt hier ist eine Tech-Demo. Jedes beginnt mit einem konkreten Ärgernis — aus dem Alltag, aus einer Arztpraxis, von einem Freund.</span><span data-en>Nothing here is a tech demo. Each project starts with a concrete annoyance — from daily life, from a medical practice, from a friend.</span></p>
+        </div>
+        <div class="value reveal">
+          <div class="ico"><svg><use href="#i-play"/></svg></div>
+          <h3><span data-de>Live statt Folien</span><span data-en>Live, not slides</span></h3>
+          <p><span data-de>Ich zeige lieber, was läuft, als was geplant ist. Sechs der neun Projekte kannst du direkt im Browser ausprobieren.</span><span data-en>I'd rather show what runs than what's planned. Six of the nine projects can be tried right in the browser.</span></p>
+        </div>
+        <div class="value reveal">
+          <div class="ico"><svg><use href="#i-scale"/></svg></div>
+          <h3><span data-de>Ehrlich vermessen</span><span data-en>Measured honestly</span></h3>
+          <p><span data-de>Was nicht funktioniert, steht genauso dabei wie das, was funktioniert — etwa beim Trading-Bot, der bisher keine bewiesene Kante nach Gebühren hat.</span><span data-en>What doesn't work is reported alongside what does — like the trading bot, which so far has no proven edge after fees.</span></p>
+        </div>
+      </div>
+      <div class="caps reveal" aria-label="Was ich baue">
+        <div class="cap-item"><div class="num">01</div><h4><span data-de>Web-Apps & PWAs</span><span data-en>Web apps & PWAs</span></h4><p><span data-de>Cloudflare Workers, Next.js, Supabase</span><span data-en>Cloudflare Workers, Next.js, Supabase</span></p></div>
+        <div class="cap-item"><div class="num">02</div><h4><span data-de>KI-Agenten-Systeme</span><span data-en>AI agent systems</span></h4><p><span data-de>Orchestrierung, Sub-Agenten, Freigabe-Flows</span><span data-en>orchestration, sub-agents, approval flows</span></p></div>
+        <div class="cap-item"><div class="num">03</div><h4><span data-de>Desktop-Apps mit lokaler KI</span><span data-en>Desktop apps with local AI</span></h4><p><span data-de>Electron, Ollama — offline, datenschutzkonform</span><span data-en>Electron, Ollama — offline, privacy-first</span></p></div>
+        <div class="cap-item"><div class="num">04</div><h4><span data-de>Automationen & Bots</span><span data-en>Automations & bots</span></h4><p><span data-de>Python, iOS Shortcuts, Telegram</span><span data-en>Python, iOS Shortcuts, Telegram</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section" id="kontakt">
+    <div class="wrap">
+      <div class="contact reveal">
+        <div>
+          <span class="kicker">04 — <span data-de>Kontakt</span><span data-en>Contact</span></span>
+          <h2><span data-de>Brauchst du etwas gebaut?</span><span data-en>Need something built?</span></h2>
+          <p><span data-de>Schreib mir kurz, worum es geht — ob Idee, Prototyp oder laufendes Produkt. Ich melde mich.</span><span data-en>Drop me a short note on what it's about — an idea, a prototype or a running product. I'll get back to you.</span></p>
+          <div class="actions">
+            <a class="btn btn-lg" href="mailto:rambog342@gmail.com"><svg><use href="#i-mail"/></svg><span data-de>E-Mail schreiben</span><span data-en>Send an email</span></a>
+            <a class="btn btn-lg ghost" href="https://github.com/usr1243" target="_blank" rel="noopener"><svg><use href="#i-gh"/></svg>GitHub</a>
+          </div>
+        </div>
+        <div class="contact-side">
+          <div><div class="k"><span data-de>Standort</span><span data-en>Location</span></div><div class="v"><span data-de>Schweiz</span><span data-en>Switzerland</span></div></div>
+          <div><div class="k"><span data-de>Sprachen</span><span data-en>Languages</span></div><div class="v"><span data-de>Deutsch, Englisch</span><span data-en>German, English</span></div></div>
+          <div><div class="k">E-Mail</div><div class="v"><a href="mailto:rambog342@gmail.com">rambog342@gmail.com</a></div></div>
+          <div><div class="k">GitHub</div><div class="v"><a href="https://github.com/usr1243" target="_blank" rel="noopener">@usr1243</a></div></div>
+        </div>
       </div>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="wrap foot-row">
-    <div>
-      <div style="font-weight:700;color:var(--text)">Lorenz</div>
-      <div style="font-size:1.15rem;font-weight:600;color:var(--text);margin-top:6px"><span data-de>Offen für Anfragen — brauchst du etwas gebaut?</span><span data-en>Open to inquiries — need something built?</span></div>
-    </div>
-    <div style="font-size:.9rem">
-      <a href="https://github.com/usr1243" target="_blank" rel="noopener">GitHub</a> ·
-      <a href="mailto:rambog342@gmail.com">E-Mail</a>
+  <div class="wrap foot">
+    <a class="brand" href="#top"><span class="mark">L</span><span>Lorenz</span></a>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="#projekte"><span data-de>Projekte</span><span data-en>Projects</span></a>
+      <a href="#agenten"><span data-de>Agenten</span><span data-en>Agents</span></a>
+      <a href="#arbeitsweise"><span data-de>Arbeitsweise</span><span data-en>How I work</span></a>
+      <a href="#kontakt"><span data-de>Kontakt</span><span data-en>Contact</span></a>
+      <a href="https://github.com/usr1243" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+    <div class="foot-meta">
+      <span>© <span id="year">2026</span> Lorenz · <span data-de>Schweiz</span><span data-en>Switzerland</span></span>
+      <span><span data-de>Eine HTML-Datei, kein Framework.</span><span data-en>One HTML file, no framework.</span></span>
     </div>
   </div>
 </footer>
 
 <script>
-const P = [
-  {
-    key:"filmtracker", feat:true, badge:{de:"Live",en:"Live"},
-    title:"Filmtracker", img:"assets/filmtracker.png",
-    tags:["Cloudflare Worker","KV","TMDb API","Login"],
-    live:"https://filmtracker-public.questside.workers.dev/landing", code:"https://github.com/usr1243/filmtracker-public",
-    de:"<b>Das Problem:</b> Die meisten führen ihre Filme in einer Excel-Liste oder gar nicht — Titel raussuchen, Genre und Jahr von Hand eintragen, kein Poster, nichts durchsuchbar. <b>Die Lösung:</b> eine öffentliche Film-Datenbank: eigenes Konto anlegen und direkt <b>über die TMDb-API</b> nach Filmen suchen — Poster, Genre und Beschreibung kommen automatisch mit. Jede Bibliothek ist privat. Login selbst gebaut (PBKDF2 + signierte Session-Cookies, kein Auth-Anbieter).",
-    en:"<b>The problem:</b> most people track films in a spreadsheet or not at all — looking up titles, typing genre and year by hand, no posters, nothing searchable. <b>The solution:</b> a public movie database: create your own account and search films directly <b>via the TMDb API</b> — poster, genre and description come automatically. Every library is private. Login built from scratch (PBKDF2 + signed session cookies, no auth provider)."
-  },
-  {
-    key:"toolkit", feat:true, badge:{de:"KI · Open Source",en:"AI · Open source"},
-    title:"Claude Agent Toolkit", img:null,
-    tags:["Claude Code","Multi-Agent","Orchestrierung"],
-    live:null, code:"https://github.com/usr1243/claude-agent-toolkit", img:"assets/agents-cover.svg",
-    de:"<b>Das Problem:</b> „KI-Agent“ klingt nach Magie — dabei steckt echte Architektur dahinter, die man den fertigen Antworten nicht ansieht. <b>Die Lösung:</b> <b>5 selbstgebaute KI-Agenten</b>, jeder offen erklärt (welches Alltagsproblem, wie gebaut) — inklusive mehrschichtiger Orchestrierung, bei der ein Agent weitere Sub-Agenten parallel steuert (Coaches, Deep-Debug, Bewerbung, Prompt-Improver, Skillcheck).",
-    en:"<b>The problem:</b> “AI agent” sounds like magic — yet there's real architecture behind it that the finished answers don't reveal. <b>The solution:</b> <b>5 self-built AI agents</b>, each explained openly (which everyday problem, how it's built) — including multi-layer orchestration where one agent coordinates sub-agents in parallel (coaches, deep-debug, application assistant, prompt improver, skill checker)."
-  },
-  {
-    key:"meddoc", badge:{de:"Kundenprojekt · Case-Study",en:"Client project · Case study"},
-    title:"MedDoc Analyzer", img:"assets/meddoc.png",
-    tags:["Electron","React","Lokale KI (Ollama)","OCR"],
-    live:null, code:null,
-    de:"<b>Das Problem:</b> In einer Arztpraxis landen täglich dutzende Berichte anderer Ärzte — jeder muss gelesen, einsortiert und richtig benannt abgelegt werden, und Patientendaten dürfen dafür das Haus nicht verlassen. <b>Die Lösung:</b> eine Desktop-App für eine <b>Schweizer Arztpraxis-Kette</b>, in der eine lokale KI (Ollama, komplett offline — keine Cloud) jeden Bericht analysiert, kategorisiert und ablagebereit benennt. Spart pro Praxisassistenz <b>ca. 2,5–3,5 Stunden pro Tag</b>. Kein Code öffentlich (Kundenprojekt).",
-    en:"<b>The problem:</b> a medical practice receives dozens of reports from other doctors every day — each must be read, sorted and filed under the right name, and patient data must not leave the building to do it. <b>The solution:</b> a desktop app for a <b>Swiss medical practice group</b> where a local AI (Ollama, fully offline — no cloud) analyses, categorises and names every report ready for filing. Saves each assistant <b>~2.5–3.5 hours per day</b>. Code not public (client project)."
-  },
-  {
-    key:"passerelle", badge:{de:"Live",en:"Live"},
-    title:"Passerelle Lerntool", img:"assets/passerelle.png",
-    tags:["PWA","Cloudflare","Groq KI","Spaced Repetition"],
-    live:"https://usr1243.github.io/passerelle-lerntool/passerelle_lerntool.html", code:"https://github.com/usr1243/passerelle-lerntool",
-    de:"<b>Das Problem:</b> Wer neben dem Job auf die Schweizer Passerelle-Prüfung lernt, muss in kurzer Zeit viel Stoff über mehrere Fächer bewältigen — verstreut über Stoffplan, Karteikarten, Timer und Zusammenfassungen in fünf verschiedenen Apps. <b>Die Lösung:</b> eine Lern-App, die alles zusammenbringt: Stoffplan, <b>Karteikarten mit Spaced Repetition</b>, Pomodoro und ein KI-Assistent, der aus eigenem Stoff Zusammenfassungen und Quizfragen macht. Kein Login, läuft offline.",
-    en:"<b>The problem:</b> studying for the Swiss Passerelle exam alongside a job means covering a lot of material across several subjects fast — scattered across a syllabus, flashcards, timers and summaries in five different apps. <b>The solution:</b> one study app that brings it together: syllabus, <b>spaced-repetition flashcards</b>, Pomodoro and an AI assistant that turns your own material into summaries and quizzes. No login, works offline."
-  },
-  {
-    key:"sidequest", badge:{de:"Live",en:"Live"},
-    title:"Questside", img:"assets/sidequest.png",
-    tags:["PWA","Supabase","Gamification"],
-    live:"https://questside.app", code:null,
-    de:"<b>Das Problem:</b> Viele in meiner Generation verbringen enorm viel Zeit auf Instagram und TikTok — und erleben dabei wenig real mit Freunden im echten Leben. Ging mir selbst so: gelangweilt, ohne zu wissen, was ich mit meiner Zeit anfangen soll. <b>Die Lösung:</b> Questside gibt dir jede Woche echte <b>Quests</b> aus 500+ Mini-Challenges — Aufgaben, bei denen du wirklich etwas erlebst statt zu scrollen. XP, Level und ein Freunde-Leaderboard machen dranbleiben leichter. Ich nutze es selbst mit ein paar Freunden.",
-    en:"<b>The problem:</b> a lot of people my age spend huge amounts of time on Instagram and TikTok — and experience very little for real with friends. I had the same problem: bored, not knowing what to do with my time. <b>The solution:</b> Questside gives you real <b>quests</b> every week from 500+ mini-challenges — tasks where you actually go do something instead of scrolling. XP, levels and a friends leaderboard make it easier to stick with. I use it myself, together with a few friends."
-  },
-  {
-    key:"handwerkos", badge:{de:"KI-Agenten · Live",en:"AI agents · Live"},
-    title:"HandwerkOS", img:"assets/handwerkos.png",
-    tags:["Next.js","TypeScript","KI-Agenten","Prisma"],
-    live:"https://handwerkos-app.vercel.app", code:null,
-    de:"<b>Das Problem:</b> In einem kleinen Handwerksbetrieb bleibt die halbe Büroarbeit — Offerten, Termine, Nachfass, Rechnungen — abends am Inhaber hängen. <b>Die Lösung:</b> ein <b>Backoffice aus KI-Agenten</b>. Ein Orchestrator liest jede Anfrage und gibt sie an den richtigen Spezialisten weiter, fachlich korrekt nach Schweizer Recht — und <b>nichts geht raus ohne Freigabe</b>. Demo-Login vorausgefüllt.",
-    en:"<b>The problem:</b> in a small trade business, half the back-office — quotes, scheduling, follow-ups, invoices — ends up on the owner's evening. <b>The solution:</b> a <b>back-office made of AI agents</b>. An orchestrator reads every request and routes it to the right specialist, correct under Swiss law — and <b>nothing goes out without approval</b>. Demo login pre-filled."
-  },
-  {
-    key:"moto", badge:{de:"Live",en:"Live"},
-    title:"Moto Weather Route", img:"assets/motoweather.png",
-    tags:["Vanilla JS","Leaflet","2 APIs"],
-    live:"https://usr1243.github.io/motoweather/", code:"https://github.com/usr1243/motoweather",
-    de:"<b>Das Problem:</b> Vor einer Motorradtour schaut man das Wetter am Ziel nach — und fährt unterwegs trotzdem in einen Regenschauer, den kein Blick aufs Ziel verrät. <b>Die Lösung:</b> ein Wetter-Tool, das das Wetter <b>entlang der ganzen Route</b> zur Fahrtzeit prüft, nicht nur am Ziel. Kombiniert Routing (OpenRouteService) und Wetter (Open-Meteo) auf einer Karte.",
-    en:"<b>The problem:</b> before a ride you check the weather at the destination — and still ride into a shower on the way that the destination never showed. <b>The solution:</b> a weather tool that checks conditions <b>along the whole route</b> at ride time, not just at the destination. Combines routing (OpenRouteService) and weather (Open-Meteo) on one map."
-  },
-  {
-    key:"budget", badge:{de:"Live",en:"Live"},
-    title:"Budget Tracker CH", img:"assets/budget-tracker.png",
-    tags:["Cloudflare","iOS Shortcuts","Apple Pay","PWA"],
-    live:"https://budgetplaner.questside.workers.dev", code:"https://github.com/usr1243/budget-tracker",
-    de:"<b>Das Problem:</b> Fast jede Budget-App scheitert am selben Punkt — man muss jede Ausgabe von Hand eintippen, vergisst es nach drei Tagen, und die Übersicht ist wertlos. <b>Die Lösung:</b> ein Budget-Tracker für die Schweiz, bei dem sich <b>Ausgaben von selbst erfassen</b>. Ein iOS-Kurzbefehl wird bei jeder Apple-Pay-Zahlung ausgelöst und bucht Betrag und Händler automatisch — kein Eintippen.",
-    en:"<b>The problem:</b> almost every budgeting app fails at the same point — you type in every expense by hand, forget after three days, and the overview is worthless. <b>The solution:</b> a budget tracker for Switzerland where <b>expenses record themselves</b>. An iOS Shortcut fires on every Apple Pay payment and books amount and merchant automatically — no typing."
-  },
-  {
-    key:"roulette", badge:{de:"Spaß-Projekt",en:"Fun project"},
-    title:"Roulette Strategy Simulator", img:"assets/roulette.png",
-    tags:["Vanilla JS","Wahrscheinlichkeit"],
-    live:null, code:"https://github.com/usr1243/roulette-simulator",
-    de:"<b>Das Problem:</b> „Mit diesem Wettsystem kannst du im Casino nicht verlieren“ — klingt überzeugend, und kaum jemand rechnet nach, warum es trotzdem nicht stimmt. <b>Die Lösung:</b> ein kleines Wochenend-Projekt über <b>Wahrscheinlichkeit</b>: Der Simulator lässt Systeme wie Martingale und Fibonacci über tausende simulierte Spins laufen — und zeigt sichtbar, warum keines den Hausvorteil schlägt.",
-    en:"<b>The problem:</b> “with this betting system you can't lose at the casino” — sounds convincing, and few people do the math on why it still isn't true. <b>The solution:</b> a small weekend project about <b>probability</b>: the simulator runs systems like Martingale and Fibonacci over thousands of simulated spins — visibly showing why none beats the house edge."
-  },
-  {
-    key:"crypto-bot", badge:{de:"Open Source",en:"Open source"},
-    title:"Crypto Signal Bot", img:"assets/crypto-signal-bot.png",
-    tags:["Python","freqtrade","Docker","Telegram","pytest"],
-    live:null, code:"https://github.com/usr1243/crypto-signal-bot",
-    de:"<b>Das Problem:</b> Ein befreundeter Trader kennt die Märkte, hat aber nicht die Zeit, den ganzen Tag Charts zu beobachten und selbst am Bildschirm zu sitzen. <b>Die Lösung:</b> ein Bot, der die <b>Rolle des Traders übernimmt</b> — rund um die Uhr Setups bewerten wie ein erfahrener Trader (~25 Indikatoren, 16 Chart-Muster), ein LLM darf dabei nur bremsen, nie selbst entscheiden. Läuft auf <b>freqtrade</b> statt Börsen-Absicherung neu zu erfinden. Ehrlich vermessen statt schöngeredet: aktuell <b>keine bewiesene Kante nach Gebühren</b> — steht im Repo genauso wie die Erfolge.",
-    en:"<b>The problem:</b> a trader friend knows the markets but doesn't have time to watch charts all day and sit at the screen himself. <b>The solution:</b> a bot that <b>takes over the trader's role</b> — evaluating setups around the clock like an experienced trader would (~25 indicators, 16 chart patterns), with an LLM that may only veto, never decide. Runs on <b>freqtrade</b> instead of reinventing exchange safety. Measured honestly instead of oversold: currently <b>no proven edge after fees</b> — reported in the repo just like the wins."
+  const TITLES = {de:"Lorenz — KI-Entwickler & Builder", en:"Lorenz — AI Developer & Builder"};
+  const DESC = {
+    de:"Ich baue KI-Produkte, die man anfassen kann: Multi-Agenten-Systeme, Web-Apps und Desktop-Software aus der Schweiz. Die meisten Projekte laufen live.",
+    en:"I build AI products you can actually click: multi-agent systems, web apps and desktop software from Switzerland. Most projects run live."
+  };
+  function setLang(l){
+    document.documentElement.lang = l;
+    document.title = TITLES[l];
+    const m = document.querySelector('meta[name="description"]'); if(m) m.content = DESC[l];
+    for(const k of ["de","en"]){
+      const b = document.getElementById("lang-"+k);
+      b.classList.toggle("on", k===l); b.setAttribute("aria-pressed", k===l);
+    }
+    try{localStorage.setItem("lang",l)}catch(e){}
   }
-];
+  setLang(document.documentElement.lang === "en" ? "en" : "de");
 
-function card(p, lang){
-  const shot = p.noimg
-    ? `<div class="shot" style="display:flex;align-items:center;justify-content:center;font-size:3rem">🤖</div>`
-    : (p.img?`<div class="shot"><img src="${p.img}" alt="${p.title}"></div>`:"");
-  const tags = p.tags.map(t=>`<span class="tag">${t}</span>`).join("");
-  const badge = p.badge?`<span class="badge">${p.badge[lang]}</span>`:"";
-  const live = p.live?`<a class="lnk live" href="${p.live}" target="_blank" rel="noopener">${lang==="de"?"Live ansehen":"View live"} ↗</a>`:"";
-  const code = p.code?`<a class="lnk" href="${p.code}" target="_blank" rel="noopener">Code ↗</a>`:"";
-  return `<article class="card${p.feat?" feat":""}">${shot}
-    <div class="body">
-      <div class="tags">${tags}</div>
-      <h3>${p.title}${badge}</h3>
-      <p class="pitch">${p[lang]}</p>
-      <div class="links">${live}${code}</div>
-    </div></article>`;
-}
-function render(){
-  const lang = document.documentElement.lang;
-  document.getElementById("grid").innerHTML = P.map(p=>card(p,lang)).join("");
-}
-function setLang(l){
-  document.documentElement.lang=l;
-  document.getElementById("de").classList.toggle("on",l==="de");
-  document.getElementById("en").classList.toggle("on",l==="en");
-  try{localStorage.setItem("lang",l)}catch(e){}
-  render();
-}
-setLang((()=>{try{return localStorage.getItem("lang")||"de"}catch(e){return "de"}})());
+  function toggleTheme(){
+    const root = document.documentElement;
+    const sysDark = matchMedia("(prefers-color-scheme: dark)").matches;
+    const cur = root.getAttribute("data-theme") || (sysDark ? "dark" : "light");
+    const next = cur === "dark" ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try{localStorage.setItem("theme", next)}catch(e){}
+  }
+
+  document.getElementById("year").textContent = new Date().getFullYear();
+
+  /* header border on scroll */
+  const hdr = document.querySelector(".site-header");
+  const onScroll = () => hdr.classList.toggle("scrolled", scrollY > 8);
+  addEventListener("scroll", onScroll, {passive:true}); onScroll();
+
+  /* reveal on scroll */
+  if("IntersectionObserver" in window){
+    const io = new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+    },{rootMargin:"0px 0px -8% 0px", threshold:.08});
+    document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+    /* active nav link */
+    const links = [...document.querySelectorAll(".links a")];
+    const secs = links.map(a=>document.querySelector(a.getAttribute("href"))).filter(Boolean);
+    const nav = new IntersectionObserver((es)=>{
+      es.forEach(e=>{ if(e.isIntersecting){ links.forEach(a=>a.classList.toggle("active", a.getAttribute("href")==="#"+e.target.id)); } });
+    },{rootMargin:"-40% 0px -55% 0px"});
+    secs.forEach(s=>nav.observe(s));
+  } else {
+    document.querySelectorAll(".reveal").forEach(el=>el.classList.add("in"));
+  }
 </script>
 </body>
 </html>
